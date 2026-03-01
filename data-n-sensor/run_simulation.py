@@ -151,21 +151,16 @@ def run_single_scenario(scenario_name: str, ticks: int = 80) -> None:
     # Print first/last few ticks
     print(f"\nFirst 5 readings:")
     for r in readings[:5]:
-        status = "🔴 VIOLATION" if r["compliance_status"] == "VIOLATION" else "🟢 OK"
-        print(f"  Tick {r['tick']:>3} | {status} | pH={r['pH']}  COD={r['COD_mg_L']}  BOD={r['BOD_mg_L']}  TSS={r['TSS_mg_L']}")
+        print(f"  Tick {r['tick']:>3} | pH={r['pH']}  COD={r['COD_mg_L']}  BOD={r['BOD_mg_L']}  TSS={r['TSS_mg_L']}")
 
     print(f"\nLast 5 readings:")
     for r in readings[-5:]:
-        status = "🔴 VIOLATION" if r["compliance_status"] == "VIOLATION" else "🟢 OK"
-        print(f"  Tick {r['tick']:>3} | {status} | pH={r['pH']}  COD={r['COD_mg_L']}  BOD={r['BOD_mg_L']}  TSS={r['TSS_mg_L']}")
+        print(f"  Tick {r['tick']:>3} | pH={r['pH']}  COD={r['COD_mg_L']}  BOD={r['BOD_mg_L']}  TSS={r['TSS_mg_L']}")
 
     # Save output
-    out_path = os.path.join(OUTPUT_DIR, f"scenario_{scenario_name.lower()}.json")
+    out_path = os.path.join(OUTPUT_DIR, "simulated_readings.json")
     save_stream_to_file(readings, out_path)
     print(f"\n✅ Scenario output → {out_path}")
-
-    report = generate_violation_report(readings)
-    print_violation_report(report)
 
 
 # ============================================================================

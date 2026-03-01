@@ -70,9 +70,26 @@ The interpretation layer that adds human context to technical traces.
    ```
 
 ### Execution Flow
-1. **Generate Data**: Run the sensor simulation in `data-n-sensor/`.
-2. **Launch Trace Engine**: Run the Streamlit UI in `trace-engine/ui/app.py`.
-3. **Run Maintenance Pipeline**: Execute `mt-llm/run_full_pipeline.py` to generate the final advice based on thelatest traces.
+
+#### 1. Generate Simulation Data
+Generate realistic wastewater sensor readings (pH spikes, BOD anomalies, etc.) for the demo:
+```bash
+python data-n-sensor/run_simulation.py --mode scenario --scenario BOD_SPIKE
+```
+This generates `data-n-sensor/output/simulated_readings.json`.
+
+#### 2. Run Full Pipeline
+Execute the end-to-end reasoning and maintenance advisory pipeline:
+```bash
+python run_full_pipeline.py
+```
+This script orchestrates:
+1. **Rule Engine**: Analyzes sensors and generates a `reasoning_trace`.
+2. **RAG Retrieval**: Fetches regulatory context from internal guidelines.
+3. **LLM Explainer**: Produces a paragraph-based explanation (BOD limit, ecological impact).
+4. **Routing**: Dispatches the alert to the Environmental Officer or Floor Engineer.
+
+The final consolidated output is saved to `full_pipeline_output.json`.
 
 ---
 

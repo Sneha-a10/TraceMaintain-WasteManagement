@@ -32,48 +32,42 @@ class CityRoutingAgent:
         return round(dist * 111.0, 2)
 
     def generate_dispatch_plan(self, decision_trace: dict) -> dict:
-        # Extract fields
-        component = decision_trace.get("component")
-        decision = decision_trace.get("decision", "NORMAL")
+        """
+        Deterministic routing based on severity:
+        HIGH or CRITICAL -> Environmental Officer
+        MEDIUM -> Floor Engineer
+        """
+        severity = decision_trace.get("severity", "LOW")
         
-        # Determine location
-        target_loc = self._get_issue_location(component)
-        
-        # Lookup action from KB
-        comp_data = self.kb.get(component)
-        action_data = None
-        if comp_data:
-            action_data = comp_data.get(decision)
-        
-        if not action_data:
-            action_data = self.kb.get("DEFAULT", {"team": "General_Ops", "action": "Inspect", "priority": "LOW"})
-            
-        distance_to_target = self._calculate_distance(self.depot_location, target_loc)
-        
-        # Generate route steps
-        if action_data["team"] == "None":
-            route_steps = []
+        # Determinstic logic
+        if severity in ["HIGH", "CRITICAL"]:
+            role = "Environmental Officer"
+            urgency = "CRITICAL"
+            action = "Immediate on-site audit and discharge stoppage."
+        elif severity == "MEDIUM":
+            role = "Floor Engineer"
+            urgency = "HIGH"
+            action = "Check aeration tanks and adjust blower frequency."
         else:
-            route_steps = [
-                {"step": 1, "instruction": f"Team {action_data['team']} depart City Depot.", "coords": self.depot_location},
-                {"step": 2, "instruction": f"Proceed to sector ({distance_to_target}km route).", "coords": target_loc},
-                {"step": 3, "instruction": f"Execute orders: {action_data['action']}", "coords": target_loc}
-            ]
-            
+            role = "Maintenance Technician"
+            urgency = "NORMAL"
+            action = "Conduct standard equipment check."
+
         return {
-            "component": component,
-            "decision": decision,
-            "assigned_team": action_data["team"],
-            "priority": action_data["priority"],
-            "recommended_action": action_data["action"],
-            "route_steps": route_steps
+            "role": role,
+            "urgency": urgency,
+            "recommended_action": action
         }
 
 if __name__ == "__main__":
     # Called directly by the pipeline
-    base_dir = os.path.dirname(os.path.dirname(__file__))
-    input_file = os.path.join(base_dir, "knowledge_base", "post_decision_trace.json")
-    output_file = os.path.join(base_dir, "dispatch_plan.json")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    
+    # We use final_recommendation.json (output of explainer) or post_decision_trace.json
+    # The user request asks for severity mapping which is in the trace.
+    input_file = os.path.join(project_root, "knowledge_base", "post_decision_trace.json")
+    output_file = os.path.join(project_root, "dispatch_plan.json")
     
     agent = CityRoutingAgent()
     trace = {}
@@ -82,8 +76,8 @@ if __name__ == "__main__":
     if os.path.exists(input_file):
         with open(input_file, 'r') as f:
             data = json.load(f)
-            # data has shape {"input_trace": {...}} from app.py
-            trace = data.get("input_trace", {})
+            # Handle standard nested structure
+            trace = data.get("input_trace", data)
     else:
         print(f"Warning: {input_file} not found.")
 

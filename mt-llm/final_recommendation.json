@@ -1,7 +1,7 @@
 {
   "recommended_action": [
-    "Critical pressure failure in waste compressor. Evacuate immediate zone and seal system."
+    "According to General Effluent Standards and CEQMS guidelines, the maximum permissible limit for BOD (Biochemical Oxygen Demand) in treated sewage effluent is 30 mg/L for discharge into inland surface waters. Effluent exceeding 30 mg/L requires immediate aeration adjustment and check for organic overload."
   ],
   "safety_note": "Verified from internal knowledge base.",
-  "reference": "Smart City Dispatch Protocol"
+  "reference": "CEQMS_Guidelines_2018.pdf"
 }

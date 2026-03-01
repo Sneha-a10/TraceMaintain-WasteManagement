@@ -12,15 +12,32 @@ env/
 
 # Project Specific (Generated Output)
 traces/
+trace-engine/traces/
 *.log
+interaction_logs.json
+ai_explanation.json
+final_recommendation.json
 
 # Data files (generated simulation output — not tracked)
 data-n-sensor/*.json
 data-n-sensor/*.csv
 data-n-sensor/output/
+mt-llm/knowledge_base/post_decision_trace.json
 
+# Environment/OS
 .DS_Store
+.env
+.venv/
+env/
+__pycache__/
 
+# AI/Agent metadata
+.gemini/
+.agents/
+.agent/
+brain/
+
+# Temp/Misc
 sensor_packets.json
 simulated_assets.csv
 extracted_features.json

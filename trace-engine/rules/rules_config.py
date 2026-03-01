@@ -1,92 +1,52 @@
 RULES = {
-    "PUMP": [
+    "STP_DEMO": [
         {
-            "rule": "PUMP_VIBRATION_CRITICAL",
-            "feature": "vibration_rms",
+            "rule": "BOD_CRITICAL_SPIKE",
+            "feature": "BOD_mg_L",
             "comparison": ">",
-            "threshold": 4.0,
-            "confidence_delta": 0.35
+            "threshold": 30.0,
+            "confidence_delta": 0.4,
+            "explanation": "BOD exceeded 30 mg/L threshold"
         },
         {
-            "rule": "PUMP_TEMP_SPIKE",
-            "feature": "temperature_delta",
+            "rule": "COD_CRITICAL_SPIKE",
+            "feature": "COD_mg_L",
             "comparison": ">",
-            "threshold": 5.0,
-            "confidence_delta": 0.3
+            "threshold": 250.0,
+            "confidence_delta": 0.35,
+            "explanation": "COD exceeded 250 mg/L limit"
         },
         {
-            "rule": "PUMP_OVERHEAT",
-            "feature": "temperature_c",
-            "comparison": ">",
-            "threshold": 95.0,
-            "confidence_delta": 0.4
+            "rule": "pH_ACIDIC_DRIFT",
+            "feature": "pH",
+            "comparison": "<",
+            "threshold": 6.5,
+            "confidence_delta": 0.3,
+            "explanation": "pH dropped below acidic limit (6.5)"
         },
         {
-            "rule": "PUMP_HIGH_LOAD",
-            "feature": "load_avg",
+            "rule": "pH_ALKALINE_DRIFT",
+            "feature": "pH",
             "comparison": ">",
-            "threshold": 85.0,
-            "confidence_delta": 0.2
-        }
-    ],
-    "CONVEYOR": [
-        {
-            "rule": "CONVEYOR_VIB_TRENDING",
-            "feature": "vibration_trend",
-            "comparison": ">",
-            "threshold": 1.5,
-            "confidence_delta": 0.25
+            "threshold": 8.5,
+            "confidence_delta": 0.3,
+            "explanation": "pH rose above alkaline limit (8.5)"
         },
         {
-            "rule": "CONVEYOR_MOTOR_HEAT",
-            "feature": "temperature_c",
+            "rule": "TSS_OVERLOAD",
+            "feature": "TSS_mg_L",
             "comparison": ">",
-            "threshold": 80.0,
-            "confidence_delta": 0.3
+            "threshold": 100.0,
+            "confidence_delta": 0.25,
+            "explanation": "Total Suspended Solids (TSS) exceeded 100 mg/L"
         },
         {
-            "rule": "CONVEYOR_LOAD_PEAK",
-            "feature": "load_avg",
+            "rule": "TEMP_ABNORMAL",
+            "feature": "temperature_C",
             "comparison": ">",
-            "threshold": 90.0,
-            "confidence_delta": 0.2
-        },
-        {
-            "rule": "CONVEYOR_VIB_SPIKE",
-            "feature": "vibration_delta",
-            "comparison": ">",
-            "threshold": 0.8,
-            "confidence_delta": 0.2
-        }
-    ],
-    "COMPRESSOR": [
-        {
-            "rule": "COMP_DISCHARGE_TEMP",
-            "feature": "temperature_c",
-            "comparison": ">",
-            "threshold": 50.0,
-            "confidence_delta": 0.2
-        },
-        {
-            "rule": "COMP_VIB_INSTABILITY",
-            "feature": "vibration_rms",
-            "comparison": ">",
-            "threshold": 5.5,
-            "confidence_delta": 0.5
-        },
-        {
-            "rule": "COMP_RAPID_WARMING",
-            "feature": "temperature_delta",
-            "comparison": ">",
-            "threshold": 5.0,
-            "confidence_delta": 0.2
-        },
-        {
-            "rule": "COMP_OVERLOAD",
-            "feature": "load_avg",
-            "comparison": ">",
-            "threshold": 85.0,
-            "confidence_delta": 0.35
+            "threshold": 40.0,
+            "confidence_delta": 0.2,
+            "explanation": "Temperature exceeded 40°C threshold"
         }
     ]
 }

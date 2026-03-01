@@ -1,7 +1,8 @@
 {
-    "explanation": "The deterministic rule engine fired the data.",
+    "explanation": "A critical anomaly was detected where BOD exceeded 30 mg/L threshold (value=70.9, threshold=30.0). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This violation is significant as it indicates high organic loading which can deplete dissolved oxygen in receiving water bodies, therefore necessitating immediate aeration adjustments as per CEQMS protocols.",
     "recommended_action": [
-        "Identify the problem. Evacuate immediately zone and seal system."
+        "Adjust aeration blower frequency immediately.",
+        "Sample secondary clarifier effluent for TSS."
     ],
-    "timestamp": "2026-03-01T15:30:45.242915"
+    "timestamp": "2026-03-01T21:47:41.802701"
 }

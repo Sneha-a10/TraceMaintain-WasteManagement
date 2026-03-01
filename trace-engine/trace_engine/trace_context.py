@@ -10,10 +10,11 @@ def create_trace(component_id: str):
         "timestamp": datetime.utcnow().isoformat(),
 
         "decision": None,
-        "final_confidence": None,
+        "severity": None,
+        "confidence_score": 0.0,
 
         "rules_triggered": [],
-        "reasoning_trace": [],
+        "reasoning_trace": [],  # List of human-readable strings
 
         "expected_behavior": None,
         "observed_behavior": None,
@@ -34,12 +35,14 @@ def add_trace_step(trace: dict, step_data: dict):
 def finalize_trace(
     trace: dict,
     decision: str,
-    final_confidence: float,
+    severity: str,
+    confidence_score: float,
     expected_behavior: str,
     observed_behavior: str
 ):
     trace["decision"] = decision
-    trace["final_confidence"] = final_confidence
+    trace["severity"] = severity
+    trace["confidence_score"] = confidence_score
     trace["expected_behavior"] = expected_behavior
     trace["observed_behavior"] = observed_behavior
     trace["expectation_mismatch"] = (expected_behavior != observed_behavior)
@@ -62,7 +65,8 @@ def get_active_trace():
 
 def end_trace(
     decision: str,
-    final_confidence: float,
+    severity: str,
+    confidence_score: float,
     expected_behavior: str,
     observed_behavior: str
 ):
@@ -74,7 +78,8 @@ def end_trace(
     finalize_trace(
         _active_trace,
         decision,
-        final_confidence,
+        severity,
+        confidence_score,
         expected_behavior,
         observed_behavior
     )

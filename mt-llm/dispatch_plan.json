@@ -1,33 +1,5 @@
 {
-    "component": "COMPRESSOR",
-    "decision": "DANGER",
-    "assigned_team": "Hazardous_Waste_Team",
-    "priority": "CRITICAL",
-    "recommended_action": "Critical pressure failure in waste compressor. Evacuate immediate zone and seal system.",
-    "route_steps": [
-        {
-            "step": 1,
-            "instruction": "Team Hazardous_Waste_Team depart City Depot.",
-            "coords": [
-                40.7128,
-                -74.006
-            ]
-        },
-        {
-            "step": 2,
-            "instruction": "Proceed to sector (1.91km route).",
-            "coords": [
-                40.7028,
-                -74.02
-            ]
-        },
-        {
-            "step": 3,
-            "instruction": "Execute orders: Critical pressure failure in waste compressor. Evacuate immediate zone and seal system.",
-            "coords": [
-                40.7028,
-                -74.02
-            ]
-        }
-    ]
+    "role": "Environmental Officer",
+    "urgency": "CRITICAL",
+    "recommended_action": "Immediate on-site audit and discharge stoppage."
 }
