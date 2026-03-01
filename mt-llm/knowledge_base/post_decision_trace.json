@@ -1,11 +1,12 @@
 {
     "input_trace": {
-        "alert_id": "alert_4d2311af",
+        "alert_id": "alert_381e0fe1",
         "component_id": "COMPRESSOR",
-        "timestamp": "2026-02-16T17:06:20.131349",
+        "timestamp": "2026-03-01T09:57:07.617742",
         "decision": "DANGER",
         "final_confidence": 1.0,
         "rules_triggered": [
+            "COMP_DISCHARGE_TEMP",
             "COMP_VIB_INSTABILITY",
             "COMP_RAPID_WARMING",
             "COMP_OVERLOAD"
@@ -13,40 +14,52 @@
         "reasoning_trace": [
             {
                 "step_id": 1,
-                "rule": "COMP_VIB_INSTABILITY",
-                "feature": "vibration_rms",
-                "feature_value": 5.92,
-                "threshold": 5.5,
+                "rule": "COMP_DISCHARGE_TEMP",
+                "feature": "temperature_c",
+                "feature_value": 51.6,
+                "threshold": 50.0,
                 "comparison": ">",
                 "rule_result": "FIRED",
-                "confidence_after_step": 0.5,
-                "timestamp": "2026-02-16T17:06:20.131349"
+                "confidence_after_step": 0.2,
+                "timestamp": "2026-03-01T09:57:07.617742"
             },
             {
                 "step_id": 2,
-                "rule": "COMP_RAPID_WARMING",
-                "feature": "temperature_delta",
-                "feature_value": 6.5,
-                "threshold": 5.0,
+                "rule": "COMP_VIB_INSTABILITY",
+                "feature": "vibration_rms",
+                "feature_value": 8.78,
+                "threshold": 5.5,
                 "comparison": ">",
                 "rule_result": "FIRED",
                 "confidence_after_step": 0.7,
-                "timestamp": "2026-02-16T17:06:20.131349"
+                "timestamp": "2026-03-01T09:57:07.617742"
             },
             {
                 "step_id": 3,
+                "rule": "COMP_RAPID_WARMING",
+                "feature": "temperature_delta",
+                "feature_value": 8.6,
+                "threshold": 5.0,
+                "comparison": ">",
+                "rule_result": "FIRED",
+                "confidence_after_step": 0.9,
+                "timestamp": "2026-03-01T09:57:07.617742"
+            },
+            {
+                "step_id": 4,
                 "rule": "COMP_OVERLOAD",
                 "feature": "load_avg",
-                "feature_value": 87.9,
+                "feature_value": 85.4,
                 "threshold": 85.0,
                 "comparison": ">",
                 "rule_result": "FIRED",
                 "confidence_after_step": 1.0,
-                "timestamp": "2026-02-16T17:06:20.131349"
+                "timestamp": "2026-03-01T09:57:07.617742"
             }
         ],
         "expected_behavior": "NORMAL",
         "observed_behavior": "DEGRADING",
-        "expectation_mismatch": true
+        "expectation_mismatch": true,
+        "component": "COMPRESSOR"
     }
 }

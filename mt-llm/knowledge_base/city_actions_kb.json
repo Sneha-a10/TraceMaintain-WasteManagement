@@ -1,0 +1,58 @@
+{
+  "PUMP": {
+    "NORMAL": {
+      "team": "None",
+      "action": "Maintain normal monitoring schedule.",
+      "priority": "LOW"
+    },
+    "BORDERLINE": {
+      "team": "Water_Ops_Inspection",
+      "action": "Dispatch inspection team to check water tank pressure and flow rate.",
+      "priority": "MEDIUM"
+    },
+    "DANGER": {
+      "team": "Water_Emergency_Response",
+      "action": "Immediate dispatch to isolate city water pump to prevent neighborhood flooding.",
+      "priority": "CRITICAL"
+    }
+  },
+  "CONVEYOR": {
+    "NORMAL": {
+      "team": "None",
+      "action": "Routine municipal waste processing operations.",
+      "priority": "LOW"
+    },
+    "BORDERLINE": {
+      "team": "Waste_Management_Crew",
+      "action": "Investigate potential waste cluster congestion to prevent localized overflow.",
+      "priority": "MEDIUM"
+    },
+    "DANGER": {
+      "team": "Sanitation_Heavy_Response",
+      "action": "Dispatch heavy clearance crew to clear critical waste blockage at central sorting facility.",
+      "priority": "HIGH"
+    }
+  },
+  "COMPRESSOR": {
+     "NORMAL": {
+      "team": "None",
+      "action": "Standard operation of pneumatic waste collection tubes.",
+      "priority": "LOW"
+    },
+    "BORDERLINE": {
+      "team": "Utility_Maintenance",
+      "action": "Check vacuum pressure in municipal waste tubes; possible minor leak.",
+      "priority": "MEDIUM"
+    },
+    "DANGER": {
+      "team": "Hazardous_Waste_Team",
+      "action": "Critical pressure failure in waste compressor. Evacuate immediate zone and seal system.",
+      "priority": "CRITICAL"
+    }
+  },
+  "DEFAULT": {
+    "team": "General_Ops",
+    "action": "General operations dispatch to assess unknown anomaly.",
+    "priority": "LOW"
+  }
+}

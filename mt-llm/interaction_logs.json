@@ -308,5 +308,411 @@
         },
         "output_explanation": "For example. The default power line limit can also be set the setting. To set for that voltage setting (which is called \u201cwired\u201d. in reverse, for electrically operated transformers of lower flow lines only but ii5 to 1 in and 2 each;)",
         "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T13:50:01.051363",
+        "input_trace": {
+            "recommended_action": [
+                "Condition: High vibration instability indicating bearing damage, rotor imbalance, or internal mechanical faults. Actions: Inspect bearings and rotor alignment; verify foundation stability; reduce operating speed if possible; schedule corrective maintenance.",
+                "Condition: Rapid compressor temperature rise indicating lubrication failure, friction escalation, or abnormal compression behavior. Actions: Verify lubrication flow immediately; inspect cooling effectiveness; reduce load and monitor closely.",
+                "Condition: Sustained compressor overload indicating excessive demand, downstream restriction, or control system mismatch. Actions: Inspect discharge line restrictions; verify control settings; reduce operating load; schedule system inspection."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Actions: Inspect the control system; check controls; inspect operating load; schedule system inspection. Observe the pressure of the compressor and its components. Determine the cause of the problem. Determine the causes of the failure. Determine the fault.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T13:58:56.725305",
+        "input_trace": {
+            "recommended_action": [
+                "fallback"
+            ],
+            "safety_note": "Standard safety protocols apply.",
+            "reference": "None"
+        },
+        "output_explanation": "The deterministic rule engine has fired the following decision trace. Translate this trace into a 2-sentence explanation for the human dispatcher. Mention the sensor value that triggered it, the location, and the rule that was broken. Do not invent new data or recommend actions.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T13:59:34.207447",
+        "input_trace": {
+            "recommended_action": [
+                "Condition: Sudden vibration spikes indicating foreign object intrusion, belt impact events, or roller seizure. Actions: Inspect conveyor path immediately; remove obstructions if present; inspect rollers for seizure; resume operation only after clearance."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "A decision trace is a useful tool for dispatching the user. It can be used to identify objects and trigger them. The data is not available in any form. The information is only available in an electronic format. The data is not available in manual or automatic versions.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:00:40.621700",
+        "input_trace": {
+            "recommended_action": [
+                "Condition: High vibration instability indicating bearing damage, rotor imbalance, or internal mechanical faults. Actions: Inspect bearings and rotor alignment; verify foundation stability; reduce operating speed if possible; schedule corrective maintenance.",
+                "Condition: Rapid compressor temperature rise indicating lubrication failure, friction escalation, or abnormal compression behavior. Actions: Verify lubrication flow immediately; inspect cooling effectiveness; reduce load and monitor closely.",
+                "Condition: Sustained compressor overload indicating excessive demand, downstream restriction, or control system mismatch. Actions: Inspect discharge line restrictions; verify control settings; reduce operating load; schedule system inspection."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Actions: Inspect the control system; check controls; inspect discharge line restrictions; check operating load; schedule system inspection. Observe the status of all equipment and systems. Follow the instructions for maintenance. Follow the manual. Follow the instructions for monitoring and maintaining your machine.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:27:16.981609",
+        "input_trace": {
+            "recommended_action": [
+                "system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation, brick work etc., where the treated water does not come in contact with the steel either directly or indirectly (Until the Final study report from IISc obtained). VII.aution Board AtTPs: l) The STP owner shall provide 'DANGER' sign board near the STP to maintain safety of the operational personnel and shall maintain operational safety protocol. Proper signages shall be displayed in both Kannada and English at the taps where treated sewage is flowing as \"not fit for drinking\". 2) Whenever there is a maintenance and staff get into STP, especially in the basements a display Board ,.Caution - Danger,' shall be put up. The gases generated might choke & create breathlessness and may be fatal. During such activities the person entering shall do so with all protective equipment's including the Oxygen portable cylinder with a mask. Two more persons ihull b. watching from outside and shall immediately evacuate the person inside if such a situation arises. A minimum of two sets of such protective gear shall always be kept available in a working condition. VIII. AdoDtion of Modular Based annroachIt is found that in many large projects especially the layouts, the occupancy is minimal in the initial stages. The adequate quantities of sewage is not generated at the time of occupancy for the effective operation of STPs. Hence, the design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include",
+                "quantities of sewage is not generated at the time of occupancy for the effective operation of STPs. Hence, the design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include the location ofthe STP as per the guidelines of KSPCB. il5;J'':-'-- MEMBERISECRETARY \\ni'' To ,tfRll C Eos,lsgos/ZSEos/ROs for information and to strictly follow above. 2) Website of KSPCB 3) Mobile App 4) Office Master file . 7lPage",
+                "is maintained in the Aeration Tank in excess of4 mg,/LAdequate carc to be taken to ensure thal higher DO is maintained in the Aeration Tank in excess of 4 mg,/L {Membrare l aakNot Required Not RequiredThe Membranes shall b\u20ac replaced periodical ly as per the Manufacturers sp\u20accificalionsNol Required 5Sludge Holding TankThis tank shall be mandatorily provided, to hold the excess sludge prior to dewatering Final Water TankTreated HoldingA minimum of 2 days capacity (Design Capacity of STP) shall be provided to store and use the water in case ofaainy s\u20acasons. 7Sludge DryingThe sludge drying beds and filter press shall not be used due to the operaliona.l issuesllorizontal centrifuge system shall be used for the STP of more than 500 KLD and Vertical c.\u20acntrifuge / B\u20aclt Prcss / Screw Press system shall be used for the STP ofless than 500 KLD 3lPage ril) nrrt of the STP) Nloving B\u20acd Bio Reactor (MBBR) / Fluidizcd Aerobic B\u20acd rector (FAB)!lembran\u20ac Bio Rcactor (lltBR)Sequentisl Batch Reacto(SBR)Activated Sludge Process(ASP) ('n il Io. Bar Screen Chalnber be)IIm IIarneterdi shal ItiIhctratI fIinc the pan I sewagen8 screen linc Screen 2 To trap and remove the oils liom the sewage Oil and Gtease Trap3 Raw sewage pumps shall sludge transfer and filter CI body and CI imPellerihke CI Other rh dalr umpp lc bodl mpellerbebm t)pe mountedutt'ace shalCcntri pumPSleed fugal pumpsPumps These form the heart ofthe treatment to compensare for the pip\u20aclines losses etc to be taken carc off. Recommended to have 2.5 kgofoxygen p\u20acr kg of BOD ofremovalAdequate air volumeAir Blowersl Acoustic Enclosutes shall be provided to ensurc the noise fiom the Air Blower should be less than the p\u20acrmissible limits, a below \\ight l)al Area 70 dB 75 drl Industria! 65 dllCommercial55 dB 45 dBResidentialNoise Control fiom Air Blower Shall mandatorily be provided for the treated"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "The design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include quantities of sewage is not generated at the time of occupancy for the effective operation of STPs.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:40:33.963235",
+        "input_trace": {
+            "recommended_action": [
+                "system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation, brick work etc., where the treated water does not come in contact with the steel either directly or indirectly (Until the Final study report from IISc obtained). VII.aution Board AtTPs: l) The STP owner shall provide 'DANGER' sign board near the STP to maintain safety of the operational personnel and shall maintain operational safety protocol. Proper signages shall be displayed in both Kannada and English at the taps where treated sewage is flowing as \"not fit for drinking\". 2) Whenever there is a maintenance and staff get into STP, especially in the basements a display Board ,.Caution - Danger,' shall be put up. The gases generated might choke & create breathlessness and may be fatal. During such activities the person entering shall do so with all protective equipment's including the Oxygen portable cylinder with a mask. Two more persons ihull b. watching from outside and shall immediately evacuate the person inside if such a situation arises. A minimum of two sets of such protective gear shall always be kept available in a working condition. VIII. AdoDtion of Modular Based annroachIt is found that in many large projects especially the layouts, the occupancy is minimal in the initial stages. The adequate quantities of sewage is not generated at the time of occupancy for the effective operation of STPs. Hence, the design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include",
+                "quantities of sewage is not generated at the time of occupancy for the effective operation of STPs. Hence, the design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include the location ofthe STP as per the guidelines of KSPCB. il5;J'':-'-- MEMBERISECRETARY \\ni'' To ,tfRll C Eos,lsgos/ZSEos/ROs for information and to strictly follow above. 2) Website of KSPCB 3) Mobile App 4) Office Master file . 7lPage",
+                "is maintained in the Aeration Tank in excess of4 mg,/LAdequate carc to be taken to ensure thal higher DO is maintained in the Aeration Tank in excess of 4 mg,/L {Membrare l aakNot Required Not RequiredThe Membranes shall b\u20ac replaced periodical ly as per the Manufacturers sp\u20accificalionsNol Required 5Sludge Holding TankThis tank shall be mandatorily provided, to hold the excess sludge prior to dewatering Final Water TankTreated HoldingA minimum of 2 days capacity (Design Capacity of STP) shall be provided to store and use the water in case ofaainy s\u20acasons. 7Sludge DryingThe sludge drying beds and filter press shall not be used due to the operaliona.l issuesllorizontal centrifuge system shall be used for the STP of more than 500 KLD and Vertical c.\u20acntrifuge / B\u20aclt Prcss / Screw Press system shall be used for the STP ofless than 500 KLD 3lPage ril) nrrt of the STP) Nloving B\u20acd Bio Reactor (MBBR) / Fluidizcd Aerobic B\u20acd rector (FAB)!lembran\u20ac Bio Rcactor (lltBR)Sequentisl Batch Reacto(SBR)Activated Sludge Process(ASP) ('n il Io. Bar Screen Chalnber be)IIm IIarneterdi shal ItiIhctratI fIinc the pan I sewagen8 screen linc Screen 2 To trap and remove the oils liom the sewage Oil and Gtease Trap3 Raw sewage pumps shall sludge transfer and filter CI body and CI imPellerihke CI Other rh dalr umpp lc bodl mpellerbebm t)pe mountedutt'ace shalCcntri pumPSleed fugal pumpsPumps These form the heart ofthe treatment to compensare for the pip\u20aclines losses etc to be taken carc off. Recommended to have 2.5 kgofoxygen p\u20acr kg of BOD ofremovalAdequate air volumeAir Blowersl Acoustic Enclosutes shall be provided to ensurc the noise fiom the Air Blower should be less than the p\u20acrmissible limits, a below \\ight l)al Area 70 dB 75 drl Industria! 65 dllCommercial55 dB 45 dBResidentialNoise Control fiom Air Blower Shall mandatorily be provided for the treated"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "The design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include quantities of sewage is not generated at the time of occupancy for the effective operation of STPs.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:43:08.252393",
+        "input_trace": {
+            "recommended_action": [
+                "<l0mg/l4 Suspended Solids Ammonical Nitrogen <5 mg/l5 <10 mg/l 6 Total Nitrogen 7<100 MPN/100 ml Faecal Coliform 5lPageI V.Installation of Sensors: The Sensors are made mandatory for all the STPs,( Including BwssB, Municipalities, ULBs, Residential, Commercial, lT, Educational lnstitutions, Railway Stations, Airports etc., ) for the parameters listed below: The online monitoring shall be strictly comply with the specifications by CPCB. The brief Guidelines are as shown below: 1No 3lon selective glass electrodesCommunication Protocol RS 485 communication with Modbus RS 485 communication with Modbus2Total Suspended Solids BODIn line ln line ln line I n lineTurbidity to TSS correlation with nephelometric technique 4 CODUV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning UV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning Electromagnetic flow measurementRS 485 communication with Modbus RS 485 communication with Modbus RS 485 communication with Modbus5 l. The Concemed Regional Officers shall properly indicate the above Technical status in their Inspection Report at the time of cFE for all the new applicants and shall follow strictly during the CFO to ensure full compliance' 2. RSEOs shall monitor on the aspects during the Monitoring/ Inspection of these units and report the action proposed suitably. This Circular shall come into effect for newly proposed STP's or modifications or upgadationstotheexistingsTPsfromthedateofissueofthismemorandumandallother circulars/office Memorandums/any directions issued in respect of STPs will become null and void. 6lPageParameter Type of Measurement pH InlineType of Sensor Flow /9 VI. Usase of TreatedSewase: I) Mandatorily the treated sewage shall be used for the toilet flushing with dual plumbing system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation,"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "This Circular shall come into effect for newly proposed STP's or modifications or upgadations to the existing STPs from the date of issue of this mechanism and all other circulars/office Memorandums/any directions issued in respect of this Regulation.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:44:18.539384",
+        "input_trace": {
+            "recommended_action": [
+                "<l0mg/l4 Suspended Solids Ammonical Nitrogen <5 mg/l5 <10 mg/l 6 Total Nitrogen 7<100 MPN/100 ml Faecal Coliform 5lPageI V.Installation of Sensors: The Sensors are made mandatory for all the STPs,( Including BwssB, Municipalities, ULBs, Residential, Commercial, lT, Educational lnstitutions, Railway Stations, Airports etc., ) for the parameters listed below: The online monitoring shall be strictly comply with the specifications by CPCB. The brief Guidelines are as shown below: 1No 3lon selective glass electrodesCommunication Protocol RS 485 communication with Modbus RS 485 communication with Modbus2Total Suspended Solids BODIn line ln line ln line I n lineTurbidity to TSS correlation with nephelometric technique 4 CODUV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning UV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning Electromagnetic flow measurementRS 485 communication with Modbus RS 485 communication with Modbus RS 485 communication with Modbus5 l. The Concemed Regional Officers shall properly indicate the above Technical status in their Inspection Report at the time of cFE for all the new applicants and shall follow strictly during the CFO to ensure full compliance' 2. RSEOs shall monitor on the aspects during the Monitoring/ Inspection of these units and report the action proposed suitably. This Circular shall come into effect for newly proposed STP's or modifications or upgadationstotheexistingsTPsfromthedateofissueofthismemorandumandallother circulars/office Memorandums/any directions issued in respect of STPs will become null and void. 6lPageParameter Type of Measurement pH InlineType of Sensor Flow /9 VI. Usase of TreatedSewase: I) Mandatorily the treated sewage shall be used for the toilet flushing with dual plumbing system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation,"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "This Circular shall come into effect for newly proposed STP's or modifications or upgadations to the existing STPs from the date of issue of this mechanism and all other circulars/office Memorandums/any directions issued in respect of this Regulation.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:46:23.253667",
+        "input_trace": {
+            "recommended_action": [
+                "<l0mg/l4 Suspended Solids Ammonical Nitrogen <5 mg/l5 <10 mg/l 6 Total Nitrogen 7<100 MPN/100 ml Faecal Coliform 5lPageI V.Installation of Sensors: The Sensors are made mandatory for all the STPs,( Including BwssB, Municipalities, ULBs, Residential, Commercial, lT, Educational lnstitutions, Railway Stations, Airports etc., ) for the parameters listed below: The online monitoring shall be strictly comply with the specifications by CPCB. The brief Guidelines are as shown below: 1No 3lon selective glass electrodesCommunication Protocol RS 485 communication with Modbus RS 485 communication with Modbus2Total Suspended Solids BODIn line ln line ln line I n lineTurbidity to TSS correlation with nephelometric technique 4 CODUV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning UV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning Electromagnetic flow measurementRS 485 communication with Modbus RS 485 communication with Modbus RS 485 communication with Modbus5 l. The Concemed Regional Officers shall properly indicate the above Technical status in their Inspection Report at the time of cFE for all the new applicants and shall follow strictly during the CFO to ensure full compliance' 2. RSEOs shall monitor on the aspects during the Monitoring/ Inspection of these units and report the action proposed suitably. This Circular shall come into effect for newly proposed STP's or modifications or upgadationstotheexistingsTPsfromthedateofissueofthismemorandumandallother circulars/office Memorandums/any directions issued in respect of STPs will become null and void. 6lPageParameter Type of Measurement pH InlineType of Sensor Flow /9 VI. Usase of TreatedSewase: I) Mandatorily the treated sewage shall be used for the toilet flushing with dual plumbing system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation,"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "This Circular shall come into effect for newly proposed STP's or modifications or upgadations to the existing STPs from the date of issue of this mechanism and all other circulars/office Memorandums/any directions issued in respect of this Regulation.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:47:21.759199",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:47:22.870535",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:47:24.001257",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:47:38.754490",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:54:55.753044",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:56:05.202727",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:57:39.540787",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T14:58:53.507013",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:00:21.943857",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:02:00.627358",
+        "input_trace": {
+            "recommended_action": [
+                "<l0mg/l4 Suspended Solids Ammonical Nitrogen <5 mg/l5 <10 mg/l 6 Total Nitrogen 7<100 MPN/100 ml Faecal Coliform 5lPageI V.Installation of Sensors: The Sensors are made mandatory for all the STPs,( Including BwssB, Municipalities, ULBs, Residential, Commercial, lT, Educational lnstitutions, Railway Stations, Airports etc., ) for the parameters listed below: The online monitoring shall be strictly comply with the specifications by CPCB. The brief Guidelines are as shown below: 1No 3lon selective glass electrodesCommunication Protocol RS 485 communication with Modbus RS 485 communication with Modbus2Total Suspended Solids BODIn line ln line ln line I n lineTurbidity to TSS correlation with nephelometric technique 4 CODUV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning UV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning Electromagnetic flow measurementRS 485 communication with Modbus RS 485 communication with Modbus RS 485 communication with Modbus5 l. The Concemed Regional Officers shall properly indicate the above Technical status in their Inspection Report at the time of cFE for all the new applicants and shall follow strictly during the CFO to ensure full compliance' 2. RSEOs shall monitor on the aspects during the Monitoring/ Inspection of these units and report the action proposed suitably. This Circular shall come into effect for newly proposed STP's or modifications or upgadationstotheexistingsTPsfromthedateofissueofthismemorandumandallother circulars/office Memorandums/any directions issued in respect of STPs will become null and void. 6lPageParameter Type of Measurement pH InlineType of Sensor Flow /9 VI. Usase of TreatedSewase: I) Mandatorily the treated sewage shall be used for the toilet flushing with dual plumbing system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation,"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "This Circular shall come into effect for newly proposed STP's or modifications or upgadations to the existing STPs from the date of issue of this mechanism and all other circulars/office Memorandums/any directions issued in respect of this Regulation.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:02:38.612365",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Activated Sludge Process(ASP) only in the case where the Sewag. I. Sqvage Treatment Plant Technologies The approved technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewag.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:04:55.013297",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "A. Sqvage Treatment Plant Technologies The approved technologies are:",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:06:23.548148",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "A. Sqvage Treatment Plant Technologies The approved technologies are:",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:07:39.668909",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "A. Sqvage Treatment Plant Technologies The approved technologies are:",
+        "user_feedback": "Accepted"
+    },
+    {
+        "timestamp": "2026-03-01T15:10:27.651295",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Observed DEGRADING instead of NORMAL",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:12:29.712314",
+        "input_trace": {
+            "recommended_action": [
+                "<l0mg/l4 Suspended Solids Ammonical Nitrogen <5 mg/l5 <10 mg/l 6 Total Nitrogen 7<100 MPN/100 ml Faecal Coliform 5lPageI V.Installation of Sensors: The Sensors are made mandatory for all the STPs,( Including BwssB, Municipalities, ULBs, Residential, Commercial, lT, Educational lnstitutions, Railway Stations, Airports etc., ) for the parameters listed below: The online monitoring shall be strictly comply with the specifications by CPCB. The brief Guidelines are as shown below: 1No 3lon selective glass electrodesCommunication Protocol RS 485 communication with Modbus RS 485 communication with Modbus2Total Suspended Solids BODIn line ln line ln line I n lineTurbidity to TSS correlation with nephelometric technique 4 CODUV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning UV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning Electromagnetic flow measurementRS 485 communication with Modbus RS 485 communication with Modbus RS 485 communication with Modbus5 l. The Concemed Regional Officers shall properly indicate the above Technical status in their Inspection Report at the time of cFE for all the new applicants and shall follow strictly during the CFO to ensure full compliance' 2. RSEOs shall monitor on the aspects during the Monitoring/ Inspection of these units and report the action proposed suitably. This Circular shall come into effect for newly proposed STP's or modifications or upgadationstotheexistingsTPsfromthedateofissueofthismemorandumandallother circulars/office Memorandums/any directions issued in respect of STPs will become null and void. 6lPageParameter Type of Measurement pH InlineType of Sensor Flow /9 VI. Usase of TreatedSewase: I) Mandatorily the treated sewage shall be used for the toilet flushing with dual plumbing system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation,"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Observed NORMAL instead of NORMAL",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:13:01.252259",
+        "input_trace": {
+            "recommended_action": [
+                "is equally important besides its Operation & Maintenance. It is observed that majority of STP'smainly of the Residential apartments are either not provided in the proper location leading to the frequent complaints by the residents about noise and odor nuisance. Also in many cases, the unit operations are not properry desigred and the treatment technology is not properly adopted reading to non conformity to the standards prescribed by the Board. The Plant operators may not be aware ofthe functioning of various unit operations and this may result in discharge of untreated sewage which ultimately joins the water bodies and may also lead to seepage of water from the tanks thereby contaminating the ground water. ,# \"D;,.E uCd ner}, dHd aA de3i,\" AVOID USE OF PLASTIC BE'ECO'FRIENDtYfor{J Fax : 080-25586321 \u20ac,rd)ce. / Email : ho@kspcb.gov.in dd.{t!. / Website : http://kspcb.gov.in f,\"f:\\N ,t The violations observed in many instances indicated improper location leading to Noise, Smell, unapproachable passage entry etc. and attracted neighboring complaints, spillages/ illegal Cross connection olsuch sewage entering intothe Groundwater. In view of the above, general guidelines are framed considering various Environmental aspects and field conditions and are enclosed as Annexure-1. However, it is to be made clear that the guidelines are general in nature & may require certain modifications/ stringent practices to be adopted depending on the specific field conditions. Hence ROs are hereby directed to advice the Project Proponents and also insist for best appropriate avai lable technologies for implementation. I. Sqvage Treatment Plant Technologies The approved Technologies are: A) Activated Sludge Process(ASP) only in the case where the Sewage generated is 500 KL and above. B) Sequential Batch Reactor(SBR) C) Membrane Bio Reactor (MBR) D) Moving Bed Bio Reactor (MBBR) / Fluidized Aerobic Bed rector (FAB) Note: As and when new technologies are brought to the"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Observed DEGRADING instead of NORMAL",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:13:33.949279",
+        "input_trace": {
+            "recommended_action": [
+                "system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation, brick work etc., where the treated water does not come in contact with the steel either directly or indirectly (Until the Final study report from IISc obtained). VII.aution Board AtTPs: l) The STP owner shall provide 'DANGER' sign board near the STP to maintain safety of the operational personnel and shall maintain operational safety protocol. Proper signages shall be displayed in both Kannada and English at the taps where treated sewage is flowing as \"not fit for drinking\". 2) Whenever there is a maintenance and staff get into STP, especially in the basements a display Board ,.Caution - Danger,' shall be put up. The gases generated might choke & create breathlessness and may be fatal. During such activities the person entering shall do so with all protective equipment's including the Oxygen portable cylinder with a mask. Two more persons ihull b. watching from outside and shall immediately evacuate the person inside if such a situation arises. A minimum of two sets of such protective gear shall always be kept available in a working condition. VIII. AdoDtion of Modular Based annroachIt is found that in many large projects especially the layouts, the occupancy is minimal in the initial stages. The adequate quantities of sewage is not generated at the time of occupancy for the effective operation of STPs. Hence, the design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include",
+                "quantities of sewage is not generated at the time of occupancy for the effective operation of STPs. Hence, the design and ixecution shall be on a modular basis so that the STP can be made operational during the lean occupancy also. IX. Plan Sanctions: The approved Plan sanction shall include the location ofthe STP as per the guidelines of KSPCB. il5;J'':-'-- MEMBERISECRETARY \\ni'' To ,tfRll C Eos,lsgos/ZSEos/ROs for information and to strictly follow above. 2) Website of KSPCB 3) Mobile App 4) Office Master file . 7lPage",
+                "is maintained in the Aeration Tank in excess of4 mg,/LAdequate carc to be taken to ensure thal higher DO is maintained in the Aeration Tank in excess of 4 mg,/L {Membrare l aakNot Required Not RequiredThe Membranes shall b\u20ac replaced periodical ly as per the Manufacturers sp\u20accificalionsNol Required 5Sludge Holding TankThis tank shall be mandatorily provided, to hold the excess sludge prior to dewatering Final Water TankTreated HoldingA minimum of 2 days capacity (Design Capacity of STP) shall be provided to store and use the water in case ofaainy s\u20acasons. 7Sludge DryingThe sludge drying beds and filter press shall not be used due to the operaliona.l issuesllorizontal centrifuge system shall be used for the STP of more than 500 KLD and Vertical c.\u20acntrifuge / B\u20aclt Prcss / Screw Press system shall be used for the STP ofless than 500 KLD 3lPage ril) nrrt of the STP) Nloving B\u20acd Bio Reactor (MBBR) / Fluidizcd Aerobic B\u20acd rector (FAB)!lembran\u20ac Bio Rcactor (lltBR)Sequentisl Batch Reacto(SBR)Activated Sludge Process(ASP) ('n il Io. Bar Screen Chalnber be)IIm IIarneterdi shal ItiIhctratI fIinc the pan I sewagen8 screen linc Screen 2 To trap and remove the oils liom the sewage Oil and Gtease Trap3 Raw sewage pumps shall sludge transfer and filter CI body and CI imPellerihke CI Other rh dalr umpp lc bodl mpellerbebm t)pe mountedutt'ace shalCcntri pumPSleed fugal pumpsPumps These form the heart ofthe treatment to compensare for the pip\u20aclines losses etc to be taken carc off. Recommended to have 2.5 kgofoxygen p\u20acr kg of BOD ofremovalAdequate air volumeAir Blowersl Acoustic Enclosutes shall be provided to ensurc the noise fiom the Air Blower should be less than the p\u20acrmissible limits, a below \\ight l)al Area 70 dB 75 drl Industria! 65 dllCommercial55 dB 45 dBResidentialNoise Control fiom Air Blower Shall mandatorily be provided for the treated"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Observed DEGRADING instead of NORMAL",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:20:01.599177",
+        "input_trace": {
+            "recommended_action": [
+                "<l0mg/l4 Suspended Solids Ammonical Nitrogen <5 mg/l5 <10 mg/l 6 Total Nitrogen 7<100 MPN/100 ml Faecal Coliform 5lPageI V.Installation of Sensors: The Sensors are made mandatory for all the STPs,( Including BwssB, Municipalities, ULBs, Residential, Commercial, lT, Educational lnstitutions, Railway Stations, Airports etc., ) for the parameters listed below: The online monitoring shall be strictly comply with the specifications by CPCB. The brief Guidelines are as shown below: 1No 3lon selective glass electrodesCommunication Protocol RS 485 communication with Modbus RS 485 communication with Modbus2Total Suspended Solids BODIn line ln line ln line I n lineTurbidity to TSS correlation with nephelometric technique 4 CODUV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning UV-Vis Spectrophotometry & combustion(Double beam with entire spectrum scanning Electromagnetic flow measurementRS 485 communication with Modbus RS 485 communication with Modbus RS 485 communication with Modbus5 l. The Concemed Regional Officers shall properly indicate the above Technical status in their Inspection Report at the time of cFE for all the new applicants and shall follow strictly during the CFO to ensure full compliance' 2. RSEOs shall monitor on the aspects during the Monitoring/ Inspection of these units and report the action proposed suitably. This Circular shall come into effect for newly proposed STP's or modifications or upgadationstotheexistingsTPsfromthedateofissueofthismemorandumandallother circulars/office Memorandums/any directions issued in respect of STPs will become null and void. 6lPageParameter Type of Measurement pH InlineType of Sensor Flow /9 VI. Usase of TreatedSewase: I) Mandatorily the treated sewage shall be used for the toilet flushing with dual plumbing system. 2) For gardening, lawn maintenance and land scape including vertical garden. The usage is considered at 5 Lt per every Square Meter of landscape area. 3) The treated water shall be used for the construction activity other than for the load bearing structures like curing, dust suppression, road consolidation,"
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Internal Knowledge Base"
+        },
+        "output_explanation": "Observed NORMAL instead of NORMAL",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:23:00.147201",
+        "input_trace": {
+            "recommended_action": [
+                "Maintain normal monitoring schedule. No immediate action required."
+            ],
+            "safety_note": "Verified from Standard Operating Procedure.",
+            "reference": "SOP-001"
+        },
+        "output_explanation": "System is operating within normal parameters. No anomalies detected.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:25:27.660495",
+        "input_trace": {
+            "recommended_action": [
+                "Critical pressure failure in waste compressor. Evacuate immediate zone and seal system."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Smart City Dispatch Protocol"
+        },
+        "output_explanation": "Observed FAILING instead of NORMAL",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:28:00.545518",
+        "input_trace": {
+            "recommended_action": [
+                "Maintain normal monitoring schedule. No immediate action required."
+            ],
+            "safety_note": "Verified from Standard Operating Procedure.",
+            "reference": "SOP-001"
+        },
+        "output_explanation": "System is operating within normal parameters. No anomalies detected.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:29:37.147169",
+        "input_trace": {
+            "recommended_action": [
+                "Investigate potential waste cluster congestion to prevent localized overflow."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Smart City Dispatch Protocol"
+        },
+        "output_explanation": "Observed DEGRADING instead of NORMAL",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-01T15:30:45.242915",
+        "input_trace": {
+            "recommended_action": [
+                "Critical pressure failure in waste compressor. Evacuate immediate zone and seal system."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "Smart City Dispatch Protocol"
+        },
+        "output_explanation": "The deterministic rule engine fired the data.",
+        "user_feedback": "Generated"
     }
 ]

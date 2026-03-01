@@ -103,6 +103,14 @@ class MachineExplainer:
         print(f"\n[INFO] Knowledge Base updated with new chunk: {new_id}")
 
     def generate_explanation(self, decision_trace):
+        # Load original trace data for observations
+        trace_path = os.path.join("knowledge_base", "post_decision_trace.json")
+        try:
+            with open(trace_path, 'r') as f:
+                trace_data = json.load(f)
+        except Exception:
+            trace_data = decision_trace # fallback
+
         # Extract recommendations specifically from the final_recommendation.json structure
         recommendations = decision_trace.get("recommended_action", [])
         if isinstance(recommendations, list):
@@ -110,32 +118,62 @@ class MachineExplainer:
         else:
             rec_text = str(recommendations)
 
+        # Humanize trace using the ACTUAL sensor trace, not the recommendation!
+        humanized = self._humanize_decision_trace(trace_data.get("input_trace", trace_data))
+        observations_text = "\n".join(humanized["observations"])
+
+        print(f"\n[DEBUG] observations_text extracted for Explanation Prompt is:\n{observations_text}\n")
+
+        # Short-circuit for NORMAL traces
+        if trace_data.get("input_trace", trace_data).get("decision") == "NORMAL":
+            return "System is operating within normal parameters. No anomalies detected.", ["Maintain normal monitoring schedule. No immediate action required."]
+
         prompt = f"""
-Task: Generate a detailed maintenance explanation based on the actions given in the {input_file}.
-Rules:
-- Summarise the actions of each condition 
-- clearly mention all the actions and do NOT miss anything
-- Another thing to add is do NOT repeat a sentence or action.
+Task: You are an explainability AI for a Smart City utility dashboard. 
+The deterministic rule engine has fired the following decision trace. Summarize what happened in ONE short, clear, and grammatically correct sentence ("What happened").
 
-Maintenance Actions:
-{rec_text}
+Decision Trace:
+{observations_text}
 
-Detailed Explanation:
+Explanation:
 """
         inputs = self.tokenizer(prompt, return_tensors="pt", truncation=True).to(self.device)
 
         outputs = self.model.generate(
             **inputs,
-            max_length=500,
-            min_length=50,
+            max_length=150,
+            min_length=10,
             do_sample=True,
             temperature=0.1,  # Lower temp for more deterministic/focused output
             top_p=0.9,
             repetition_penalty=2.0, # High penalty for repetition
         )
 
-        explanation = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        return explanation.strip()
+        explanation = self.tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
+
+        # Step 2: Generate Concise Actions
+        action_prompt = f"""Task: Extract the core mechanical or maintenance action from the text below and summarize it into ONE short, clear, actionable sentence. Ignore any document headers, fax numbers, phone numbers, or administrative jargon. If no clear mechanical action exists, output "Conduct standard field inspection and report findings."
+
+Manual Text:
+{rec_text}
+
+Summary:"""
+        action_inputs = self.tokenizer(action_prompt, return_tensors="pt", truncation=True).to(self.device)
+        action_outputs = self.model.generate(
+            **action_inputs,
+            max_length=100,
+            min_length=15,
+            do_sample=True,
+            temperature=0.2,
+            top_p=0.85,
+            repetition_penalty=2.0
+        )
+        actions_raw = self.tokenizer.decode(action_outputs[0], skip_special_tokens=True).strip()
+        
+        # Clean up the output into a list format for the UI
+        action_list = [actions_raw] if actions_raw else ["Conduct a standard field inspection.", "Verify utility sensor telemetry."]
+
+        return explanation, action_list
 
     def log_interaction(self, input_trace, output_explanation, user_feedback=None):
         log_entry = {
@@ -222,18 +260,22 @@ def main():
 
     # Generate Explanation Phase
     print("\nGenerating explanation...")
-    explanation = explainer.generate_explanation(decision_trace)
+    explanation, recommended_action = explainer.generate_explanation(decision_trace)
     
     # Print Result
     print("-" * 50)
     print("Generated Explanation:")
     print(explanation)
+    print("Summarized Recommendations:")
+    for r in recommended_action:
+        print(f"- {r}")
     print("-" * 50)
 
     # Save output for UI to read
     with open("ai_explanation.json", "w") as f:
         json.dump({
             "explanation": explanation,
+            "recommended_action": recommended_action,
             "timestamp": datetime.datetime.now().isoformat()
         }, f, indent=4)
 

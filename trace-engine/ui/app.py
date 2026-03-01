@@ -220,13 +220,17 @@ st.markdown("""
 # -------------------------------------------------
 # State Management
 # -------------------------------------------------
-def export_trace_to_llm(trace):
+def export_trace_to_llm(trace, component="UNKNOWN"):
     """Saves the current trace to the mt-llm knowledge base for processing."""
     llm_input_path = os.path.join(PROJECT_ROOT, "..", "mt-llm", "knowledge_base", "post_decision_trace.json")
     try:
         os.makedirs(os.path.dirname(llm_input_path), exist_ok=True)
+        # Ensure component is in the trace
+        trace_copy = trace.copy()
+        if "component" not in trace_copy:
+            trace_copy["component"] = component
         # Wrap in expected format
-        data = {"input_trace": trace}
+        data = {"input_trace": trace_copy}
         with open(llm_input_path, "w") as f:
             json.dump(data, f, indent=4)
     except Exception as e:
@@ -268,14 +272,12 @@ def run_ai_pipeline():
     
     # Resolve correct Python interpreter
     python_exe = sys.executable
-    venv_python = os.path.join(PROJECT_ROOT, "..", ".venv", "Scripts", "python.exe")
-    if os.path.exists(venv_python):
-        python_exe = venv_python
 
     base_path = os.path.join(PROJECT_ROOT, "..", "mt-llm")
     input_trace = os.path.join(base_path, "knowledge_base", "post_decision_trace.json")
     rag_script = os.path.join(base_path, "pipeline_logic", "process_alert_workflow.py")
     exp_script = os.path.join(base_path, "pipeline_logic", "machine_explainer.py")
+    route_script = os.path.join(base_path, "pipeline_logic", "routing_agent.py")
     
     if not os.path.exists(input_trace):
         return {"error": f"Input trace missing at {input_trace}"}
@@ -290,10 +292,16 @@ def run_ai_pipeline():
         exp_res = subprocess.run([python_exe, exp_script], cwd=base_path, env=env, capture_output=True, text=True)
         if exp_res.returncode != 0:
             return {"error": f"Explainer Stage Failed: {exp_res.stderr}"}
+            
+        # 3. Run Routing Agent
+        route_res = subprocess.run([python_exe, route_script], cwd=base_path, env=env, capture_output=True, text=True)
+        if route_res.returncode != 0:
+            return {"error": f"Routing Stage Failed: {route_res.stderr}"}
         
-        # 3. Load Results
+        # 4. Load Results
         rec_path = os.path.join(base_path, "final_recommendation.json")
         exp_path = os.path.join(base_path, "ai_explanation.json")
+        route_path = os.path.join(base_path, "dispatch_plan.json")
         
         recs = {}
         if os.path.exists(rec_path):
@@ -303,7 +311,12 @@ def run_ai_pipeline():
         if os.path.exists(exp_path):
             with open(exp_path, 'r') as f: expl = json.load(f)
             
-        return {**recs, **expl}
+        plan = {}
+        if os.path.exists(route_path):
+            with open(route_path, 'r') as f: plan = json.load(f)
+            
+        # Create a payload format expected by UI
+        return {**recs, **expl, "dispatch_plan": plan}
     except Exception as e:
         return {"error": str(e)}
 
@@ -354,6 +367,11 @@ def render_llm_panel(trace):
         recs = res.get("recommended_action", [])
         safety = res.get("safety_note", "No safety note provided.")
         ref = res.get("reference", "Internal Knowledge Base")
+        plan = res.get("dispatch_plan", {})
+        
+        assigned_team = plan.get("assigned_team", "N/A")
+        priority = plan.get("priority", "N/A")
+        route_steps = plan.get("route_steps", [])
 
         # Consolidate HTML for absolute structure (Remove indentation to avoid MD code blocks)
         html = f"""<div class="content-box">
@@ -372,6 +390,20 @@ def render_llm_panel(trace):
         for r in recs:
             html += f'<div style="margin-bottom: 6px; display: flex;"><span style="color: #3fb950; margin-right: 8px;">•</span> {r}</div>'
         
+        html += f"""</div>
+</div>
+<div style="margin-bottom: 1.5rem; background: rgba(31, 111, 235, 0.05); padding: 1rem; border-left: 3px solid #1f6feb; border-radius: 6px;">
+<div style="color: #1f6feb; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">Dispatch Plan</div>
+<div style="color: #e6edf3; font-size: 0.9rem; margin-bottom: 8px;">
+<strong>Team:</strong> {assigned_team} &nbsp; | &nbsp; <strong>Priority:</strong> <span style="color: {'#ff7b72' if priority in ['HIGH', 'CRITICAL'] else '#d29922' if priority == 'MEDIUM' else '#3fb950'};">{priority}</span>
+</div>
+<div style="color: #f0f6fc; font-size: 0.85rem;">"""
+        if route_steps:
+            for s in route_steps:
+                html += f'<div style="margin-bottom: 4px;"><strong>Step {s["step"]}:</strong> {s["instruction"]}</div>'
+        else:
+            html += f'<div>No routing required.</div>'
+            
         html += f"""</div>
 </div>
 <div style="padding: 10px; background: rgba(218, 54, 51, 0.1); border: 1px solid #da3633; border-radius: 6px; margin-bottom: 0.5rem;">
@@ -513,7 +545,7 @@ with col_controls:
                 if cols[i].button(label, key=f"tab_{i}", type="primary" if is_active else "secondary", use_container_width=True):
                     set_tab(i)
                     # Export the clicked trace
-                    export_trace_to_llm(results[i]["trace"])
+                    export_trace_to_llm(results[i]["trace"], results[i].get("component"))
                     st.rerun()
             else:
                 cols[i].button(f"Event {i+1}", disabled=True, key=f"tab_disable_{i}", use_container_width=True)
@@ -525,7 +557,8 @@ with col_run:
             st.session_state.simulation_results = run_live_simulation()
             # Export the first trace immediately
             if st.session_state.simulation_results:
-                export_trace_to_llm(st.session_state.simulation_results[0]["trace"])
+                first_res = st.session_state.simulation_results[0]
+                export_trace_to_llm(first_res["trace"], first_res.get("component"))
         st.session_state.active_event_idx = 0
         st.rerun()
      # Marker after button to anchor CSS strictly to this column

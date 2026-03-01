@@ -12,11 +12,8 @@ def run_script(script_path):
     print(f"Running {os.path.basename(script_path)}...")
     print(f"{'='*50}\n")
     
-    # Use the specific python from venv if available, else current interpretter
+    # Use the current executing python which has the right dependencies
     python_exe = sys.executable
-    venv_python = os.path.join(SCRIPT_DIR, "..", ".venv", "Scripts", "python.exe")
-    if os.path.exists(venv_python):
-        python_exe = venv_python
 
     try:
         # Run from the mt-llm folder so relative paths inside scripts work
@@ -54,6 +51,13 @@ def main():
     explainer_script = os.path.join("pipeline_logic", "machine_explainer.py")
     if not run_script(explainer_script):
         print("\n[STOP] Pipeline halted due to error in Explainer step.")
+        return
+
+    # Step 3: Run the Routing Agent
+    time.sleep(1)
+    routing_script = os.path.join("pipeline_logic", "routing_agent.py")
+    if not run_script(routing_script):
+        print("\n[STOP] Pipeline halted due to error in Routing step.")
         return
 
     print(f"\n{'='*50}")

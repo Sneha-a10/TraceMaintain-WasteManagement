@@ -1,9 +1,7 @@
 {
   "recommended_action": [
-    "Condition: High vibration instability indicating bearing damage, rotor imbalance, or internal mechanical faults. Actions: Inspect bearings and rotor alignment; verify foundation stability; reduce operating speed if possible; schedule corrective maintenance.",
-    "Condition: Rapid compressor temperature rise indicating lubrication failure, friction escalation, or abnormal compression behavior. Actions: Verify lubrication flow immediately; inspect cooling effectiveness; reduce load and monitor closely.",
-    "Condition: Sustained compressor overload indicating excessive demand, downstream restriction, or control system mismatch. Actions: Inspect discharge line restrictions; verify control settings; reduce operating load; schedule system inspection."
+    "Critical pressure failure in waste compressor. Evacuate immediate zone and seal system."
   ],
   "safety_note": "Verified from internal knowledge base.",
-  "reference": "Internal Knowledge Base"
+  "reference": "Smart City Dispatch Protocol"
 }

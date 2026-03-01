@@ -140,46 +140,71 @@ def main():
     # 3. Retrieve Context from Local KB
     kb_path = os.path.join("knowledge_base", "knowledgebase.json")
     
-    # Try direct rule_id lookup first if we have triggered rules
-    relevant_docs = []
-    if 'rules_triggered' in trace and trace['rules_triggered']:
-        relevant_docs = retrieve_by_rule_ids(trace['rules_triggered'], kb_path)
-    
-    # Fall back to semantic search if no direct matches
-    if not relevant_docs:
-        logging.info("No direct rule matches, trying semantic search...")
-        relevant_docs = retrieve_knowledge(query_context, kb_path)
-    
-    logging.info(f"Retrieved {len(relevant_docs)} relevant context records.")
-
-    # 4. Format Context
-    context_text = ""
-    references = set()
-    for idx, doc in enumerate(relevant_docs, 1):
-        context_text += f"Source {idx}:\n{doc.get('text', 'No text')}\n---\n"
-        if 'source' in doc:
-             references.add(doc['source'])
-        elif 'metadata' in doc and 'document' in doc['metadata']:
-            references.add(doc['metadata']['document'])
-
-    reference_str = ", ".join(references) if references else "Internal Knowledge Base"
-
-    # 5. Generate Recommendation (Strict Local KB)
     output_data = {}
     
-    if relevant_docs:
-        rec_actions = [doc.get("text", "No text content") for doc in relevant_docs]
+    if decision == "NORMAL":
+        logging.info("Decision is NORMAL. Bypassing semantic search.")
         output_data = {
-            "recommended_action": rec_actions,
-            "safety_note": "Verified from internal knowledge base.",
-            "reference": reference_str
+            "recommended_action": ["Maintain normal monitoring schedule. No immediate action required."],
+            "safety_note": "Verified from Standard Operating Procedure.",
+            "reference": "SOP-001"
         }
     else:
-        output_data = {
-            "recommended_action": ["fallback"],
-            "safety_note": "Standard safety protocols apply.",
-            "reference": "None"
-        }
+        # Try direct rule_id lookup first if we have triggered rules
+        relevant_docs = []
+        if 'rules_triggered' in trace and trace['rules_triggered']:
+            relevant_docs = retrieve_by_rule_ids(trace['rules_triggered'], kb_path)
+        
+        # Fall back to semantic search if no direct matches
+        if not relevant_docs:
+            logging.info("No direct rule matches, checking city_actions_kb.json before semantic search...")
+            city_actions_path = os.path.join("knowledge_base", "city_actions_kb.json")
+            try:
+                with open(city_actions_path, 'r') as f:
+                    city_kb = json.load(f)
+                comp = trace.get("component", "")
+                if comp in city_kb and decision in city_kb[comp]:
+                    # Create a synthetic doc from the city actions KB
+                    relevant_docs.append({
+                        "text": city_kb[comp][decision]["action"],
+                        "metadata": {"document": "Smart City Dispatch Protocol"}
+                    })
+            except Exception as e:
+                logging.warning(f"Failed to check city_actions_kb: {e}")
+
+        # If STILL no match, try semantic search
+        if not relevant_docs:
+            logging.info("No city action match, pursuing semantic search fallback...")
+            relevant_docs = retrieve_knowledge(query_context, kb_path)
+        
+        logging.info(f"Retrieved {len(relevant_docs)} relevant context records.")
+
+        # 4. Format Context
+        context_text = ""
+        references = set()
+        for idx, doc in enumerate(relevant_docs, 1):
+            context_text += f"Source {idx}:\n{doc.get('text', 'No text')}\n---\n"
+            if 'source' in doc:
+                 references.add(doc['source'])
+            elif 'metadata' in doc and 'document' in doc['metadata']:
+                references.add(doc['metadata']['document'])
+
+        reference_str = ", ".join(references) if references else "Internal Knowledge Base"
+
+        # 5. Generate Recommendation (Strict Local KB)
+        if relevant_docs:
+            rec_actions = [doc.get("text", "No text content") for doc in relevant_docs]
+            output_data = {
+                "recommended_action": rec_actions,
+                "safety_note": "Verified from internal knowledge base.",
+                "reference": reference_str
+            }
+        else:
+            output_data = {
+                "recommended_action": ["fallback"],
+                "safety_note": "Standard safety protocols apply.",
+                "reference": "None"
+            }
 
     # 6. Save Logic
     output_file = "final_recommendation.json"
