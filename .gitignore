@@ -14,9 +14,10 @@ env/
 traces/
 *.log
 
-# Data files
+# Data files (generated simulation output — not tracked)
 data-n-sensor/*.json
 data-n-sensor/*.csv
+data-n-sensor/output/
 
 .DS_Store
 
