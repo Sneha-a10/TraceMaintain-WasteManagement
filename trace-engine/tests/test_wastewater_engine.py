@@ -1,6 +1,7 @@
 import json
 import sys
 import os
+import subprocess
 
 # Add parent directory to path so we can import trace_engine
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -14,8 +15,13 @@ def run_test():
     readings_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data-n-sensor/output/simulated_readings.json'))
     
     if not os.path.exists(readings_path):
-        print(f"Error: {readings_path} not found. Run simulation first.")
-        return
+        print(f">>> {readings_path} not found. Running simulation...")
+        sim_script = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data-n-sensor/run_simulation.py'))
+        sim_cwd = os.path.dirname(sim_script)
+        subprocess.run([sys.executable, sim_script, "--mode", "scenario", "--scenario", "BOD_SPIKE", "--ticks", "50"], check=True, cwd=sim_cwd)
+        if not os.path.exists(readings_path):
+            print("Error: Simulation failed to generate readings.")
+            return
 
     with open(readings_path, "r") as f:
         records = json.load(f)

@@ -1,19 +1,27 @@
 RULES = {
     "STP_DEMO": [
         {
-            "rule": "BOD_CRITICAL_SPIKE",
+            "rule": "BOD_MODERATE_SPIKE",
             "feature": "BOD_mg_L",
             "comparison": ">",
             "threshold": 30.0,
             "confidence_delta": 0.4,
-            "explanation": "BOD exceeded 30 mg/L threshold"
+            "explanation": "BOD exceeded 30 mg/L (Moderate Exposure)"
+        },
+        {
+            "rule": "BOD_EXTREME_SPIKE",
+            "feature": "BOD_mg_L",
+            "comparison": ">",
+            "threshold": 60.0,
+            "confidence_delta": 0.4,
+            "explanation": "BOD exceeded 60 mg/L (Extreme Violation)"
         },
         {
             "rule": "COD_CRITICAL_SPIKE",
             "feature": "COD_mg_L",
             "comparison": ">",
             "threshold": 250.0,
-            "confidence_delta": 0.35,
+            "confidence_delta": 0.5,
             "explanation": "COD exceeded 250 mg/L limit"
         },
         {

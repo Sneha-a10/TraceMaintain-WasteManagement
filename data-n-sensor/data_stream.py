@@ -248,7 +248,7 @@ def generate_multi_asset_batch(
         readings = generate_batch(asset, engine, total_ticks, schedule)
         all_readings.extend(readings)
 
-        print(f"✓ Simulated {total_ticks} ticks for asset: {config['asset_id']}")
+        print(f"[OK] Simulated {total_ticks} ticks for asset: {config['asset_id']}")
 
     return all_readings
 
@@ -265,6 +265,6 @@ def _print_reading(reading: dict) -> None:
         f"COD={reading['COD_mg_L']:.1f}  "
         f"BOD={reading['BOD_mg_L']:.1f}  "
         f"TSS={reading['TSS_mg_L']:.1f}  "
-        f"Flow={reading['flow_rate_m3_hr']:.1f} m\u00b3/hr  "
+        f"Flow={reading['flow_rate_m3_hr']:.1f} m3/hr  "
         f"[{reading.get('scenario', 'NORMAL')}]"
     )

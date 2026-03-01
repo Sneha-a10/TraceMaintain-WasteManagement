@@ -5962,5 +5962,14 @@
             "section": "User_Verified",
             "timestamp": "2026-03-01T15:07:39.659008"
         }
+    },
+    {
+        "id": "chunk_1772387147",
+        "text": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=76.97, threshold=30.0) BOD exceeded 60 mg/L (Extreme Violation) (value=76.97, threshold=60.0). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+        "metadata": {
+            "failure_type": "USER_FEEDBACK",
+            "section": "User_Verified",
+            "timestamp": "2026-03-01T23:15:47.715306"
+        }
     }
 ]

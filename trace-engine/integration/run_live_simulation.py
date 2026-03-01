@@ -17,157 +17,72 @@ from trace_engine.rule_engine import RuleEngine
 
 
 # -------------------------------------------------
-# PATH CONFIG (data-n-sensor is a sibling folder)
+# PATH CONFIG
 # -------------------------------------------------
-
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-
 DATA_SENSOR_DIR = os.path.join(BASE_DIR, "data-n-sensor")
-
-DATA_GEN_SCRIPT = os.path.join(DATA_SENSOR_DIR, "data_generated.py")
-FEATURE_SCRIPT = os.path.join(DATA_SENSOR_DIR, "feature_extraction.py")
-
-FEATURE_JSON = os.path.join(DATA_SENSOR_DIR, "extracted_features.json")
-
-
-# -------------------------------------------------
-# MAIN ORCHESTRATION
-# -------------------------------------------------
+RUN_SIM_SCRIPT = os.path.join(DATA_SENSOR_DIR, "run_simulation.py")
+SIM_OUTPUT_JSON = os.path.join(DATA_SENSOR_DIR, "output", "simulated_readings.json")
 
 def run_live_simulation():
     import sys
-    # 1️⃣ Run raw data generation
+    # 1️⃣ Run raw data generation (Wastewater)
+    # We run the BOD_SPIKE scenario for a dramatic demo
     subprocess.run(
-        [sys.executable, DATA_GEN_SCRIPT],
+        [sys.executable, RUN_SIM_SCRIPT, "--mode", "scenario", "--scenario", "BOD_SPIKE", "--ticks", "50"],
         check=True,
-        cwd=DATA_SENSOR_DIR  # Run inside data-n-sensor so files are saved there
+        cwd=DATA_SENSOR_DIR
     )
 
-    # 2️⃣ Run feature extraction
-    subprocess.run(
-        [sys.executable, FEATURE_SCRIPT],
-        check=True,
-        cwd=DATA_SENSOR_DIR  # Run inside data-n-sensor so it finds the CSV and saves JSON there
-    )
+    # 2️⃣ Load simulated readings
+    if not os.path.exists(SIM_OUTPUT_JSON):
+        raise RuntimeError(f"simulated_readings.json not found at {SIM_OUTPUT_JSON}")
 
-    # 3️⃣ Load extracted features
-    if not os.path.exists(FEATURE_JSON):
-        raise RuntimeError("extracted_features.json not found after feature extraction")
+    with open(SIM_OUTPUT_JSON, "r") as f:
+        readings = json.load(f)
 
-    with open(FEATURE_JSON, "r") as f:
-        feature_events = json.load(f)
+    if not isinstance(readings, list):
+        raise ValueError("simulated_readings.json must be a list")
 
-    if not isinstance(feature_events, list):
-        raise ValueError("extracted_features.json must be a list")
+    # 3️⃣ Select 3 representative events for the UI tabs
+    # We pick them to show the progression: Normal -> Warning -> Danger
+    selected_readings = []
+    
+    if len(readings) > 5:  selected_readings.append(readings[5])  # NORMAL (Baseline)
+    if len(readings) > 35: selected_readings.append(readings[35]) # WARNING (Decaying BOD spike)
+    if len(readings) > 10: selected_readings.append(readings[10]) # DANGER (Absolute peak of BOD spike)
+    
+    # If not enough readings, just take what we have
+    if not selected_readings and readings:
+        selected_readings = readings[:3]
 
-    # 4️⃣ Select exactly 3 events: 1 Pump (Normal), 1 Conveyor (Pre-Failure), 1 Compressor (Failure)
-    selected_events = []
-    
-    # Requirement:
-    # - PUMP: Normal (Phase 0)
-    # - CONVEYOR: Pre-Failure (Phase 2)
-    # - COMPRESSOR: Failure Risk (Phase 3)
-    
-    requirements = {
-        "PUMP": 0,
-        "CONVEYOR": 2,
-        "COMPRESSOR": 3
-    }
-    
-    found = {k: False for k in requirements}
-    
-    
-    # Collect all candidates first
-    candidates = {k: [] for k in requirements}
-    
-    for event in feature_events:
-        comp = event.get("component")
-        phase = event.get("failure_phase")
-        
-        if comp in requirements and phase == requirements[comp]:
-            candidates[comp].append(event)
-            
-    
-    # Select the "most representative" event for each phase
-    # - Normal: Low vibration (median/middle is fine)
-    # - Pre-Failure: High trend/delta
-    # - Failure: High RMS/Temp
-    
-    for comp, events in candidates.items():
-        if not events:
-            print(f"⚠️ No events found for {comp} (Phase {requirements[comp]})")
-            continue
-            
-        target_event = None
-        
-        if comp == "PUMP":
-             # Normal: Just pick middle
-             target_event = events[min(len(events)//2, len(events)-1)]
-             
-        elif comp == "CONVEYOR":
-             # Pre-Failure: Look for event that satisfies rules
-             # Rules: Trend > 1.5 (+0.25), Spike > 0.8 (+0.2), Temp > 80 (+0.3)
-             # We want BORDERLINE (score >= 0.1)
-             target_event = events[0]
-             max_conveyor_score = -1
-             
-             for e in events:
-                 f = e["features"]
-                 score = 0
-                 if f.get("vibration_trend", 0) > 1.5: score += 0.25
-                 if f.get("vibration_delta", 0) > 0.8: score += 0.2
-                 
-                 if score > max_conveyor_score:
-                     max_conveyor_score = score
-                     target_event = e
-             
-        elif comp == "COMPRESSOR":
-             # Turn on Failure: Need DANGER (score >= 0.7)
-             # Rules: Vib > 5.5 (+0.5), Temp > 50 (+0.2), Load > 85 (+0.35)
-             target_event = events[0]
-             max_comp_score = -1
-             
-             for e in events:
-                 f = e["features"]
-                 score = 0
-                 if f.get("vibration_rms", 0) > 5.5: score += 0.5
-                 if f.get("temperature_c", 0) > 50.0: score += 0.2
-                 if f.get("load_avg", 0) > 85.0: score += 0.35
-                 if f.get("temperature_delta", 0) > 5.0: score += 0.2
-                 
-                 if score > max_comp_score:
-                     max_comp_score = score
-                     target_event = e
-        
-        else:
-             target_event = events[0]
-             
-        selected_events.append(target_event)
-        found[comp] = True
-            
-    # Fallback: if specific phases not found, just take one of each component
-    if not all(found.values()):
-        print(f"⚠️ Could not find all exact phases. Found: {found}")
-        # Try to fill gaps using any available event for valid components
-        available_components = set(e.get("component") for e in feature_events)
-        for k in requirements:
-             if not found[k] and k in available_components:
-                 # Find ANY event for this component
-                  for event in feature_events:
-                        if event.get("component") == k:
-                             selected_events.append(event)
-                             break
-
-    # 5️⃣ Run Trace Engine
+    # 4️⃣ Run Rule Engine for each selected event
     engine = RuleEngine()
     results = []
 
-    for event in selected_events:
+    for r in selected_readings:
+        # Prepare event format for rule engine - MUST MATCH rules_config.py exactly
+        event = {
+            "asset_id": r.get("asset_id", "STP_DEMO"),
+            "timestamp": r.get("timestamp"),
+            "pH": r.get("pH"),
+            "BOD_mg_L": r.get("BOD_mg_L"),
+            "COD_mg_L": r.get("COD_mg_L"),
+            "TSS_mg_L": r.get("TSS_mg_L"),
+            "temperature_C": r.get("temperature_C", 25.0)
+        }
+        
         trace, trace_path = engine.evaluate(event)
         results.append({
-            "component": event["component"],
+            "component": event["asset_id"],
             "timestamp": event["timestamp"],
-            "features": event["features"],
+            "features": {
+                "pH": event["pH"],
+                "BOD": event["BOD_mg_L"],
+                "COD": event["COD_mg_L"],
+                "TSS": event["TSS_mg_L"],
+                "Temp": event["temperature_C"]
+            },
             "trace": trace,
             "trace_path": trace_path
         })

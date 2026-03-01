@@ -1,7 +1,7 @@
 streamlit
+numpy
+pandas
 torch
 transformers
 sentence-transformers
-numpy
-pandas
-papermill
+Pillow

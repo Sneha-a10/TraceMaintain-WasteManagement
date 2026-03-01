@@ -1,5 +1,5 @@
 {
     "role": "Environmental Officer",
-    "urgency": "CRITICAL",
-    "recommended_action": "Immediate on-site audit and discharge stoppage."
+    "urgency": "DANGER / IMMEDIATE",
+    "recommended_action": "EMERGENCY: Immediate discharge stoppage and regulatory notification."
 }

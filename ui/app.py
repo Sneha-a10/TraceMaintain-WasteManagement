@@ -3,622 +3,335 @@ import sys
 import os
 import subprocess
 import json
+import datetime
 
 # -------------------------------------------------
-# Make trace-engine importable
+# Path Configuration
 # -------------------------------------------------
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.append(PROJECT_ROOT)
+# The integration module is inside the trace-engine folder
+sys.path.append(os.path.join(PROJECT_ROOT, "trace-engine"))
 
 from integration.run_live_simulation import run_live_simulation
 
-
 # -------------------------------------------------
-# Streamlit Page Config & Theme
+# Streamlit Page Config
 # -------------------------------------------------
 st.set_page_config(
-    page_title="Industrial Trace Engine Desktop Dashboard",
+    page_title="IOT-Trace: Wastewater Monitoring Dashboard",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
-# Custom CSS to strictly match the reference image
+# -------------------------------------------------
+# Custom CSS for Premium Look
+# -------------------------------------------------
 st.markdown("""
 <style>
-    /* 1. Global Reset & Dark Theme */
+    /* Global Reset */
     .stApp {
         background-color: #0d1117;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
         color: #c9d1d9;
     }
     
-    /* 2. Controls & Widgets */
-    .stButton > button {
-        background-color: #1f6feb;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-weight: 600;
-        padding: 0.5rem 1rem;
-    }
-    .stButton > button:hover {
-        background-color: #388bfd;
-    }
-    .stButton > button:disabled {
-        background-color: #161b22;
-        color: #484f58;
-        border: 1px solid #30363d;
-    }
-    
-    .feature-key { color: #d2a8ff; font-weight: 500; }
-    .feature-val { color: #f0f6fc; font-weight: 700; font-family: monospace; }
-    
-    /* Run Simulation Button - Teal with White Border */
-    .stButton:has(+ div .run-marker) button {
-        background-color: #009688 !important;
-        border: 1.5px solid #ffffff !important;
-        color: white !important;
-    }
-    .stButton:has(+ div .run-marker) button:hover,
-    .stButton:has(+ div .run-marker) button:active,
-    .stButton:has(+ div .run-marker) button:focus {
-        background-color: #00bfa5 !important;
-        border-color: #ffffff !important;
-        color: white !important;
-        box-shadow: 0 0 10px rgba(0, 150, 136, 0.4) !important;
-    }
-    
-    /* 3. Status Banner (Red Strip) */
-    .status-banner {
-        width: 100%;
-        padding: 1rem 2rem;
-        margin-top: 0;
-        margin-bottom: 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: white;
-        font-weight: bold;
-        border-radius: 4px;
-    }
-    .banner-danger { background-color: #da3633; box-shadow: 0 4px 12px rgba(218, 54, 51, 0.2); }
-    .banner-normal { background-color: #238636; box-shadow: 0 4px 12px rgba(35, 134, 54, 0.2); }
-    .banner-borderline { background-color: #d29922; color: #1a1a1a; }
-
-    /* 4. Panels (Cards) */
-    .panel-container {
-        background-color: #0d1117; /* Matches bg, distinct by layout */
-        border: 1px solid #30363d; /* Subtle border */
-        border-radius: 6px;
-        padding: 0;
-        overflow: hidden;
-        height: 100%;
-        box-shadow: 0 0 0 1px #30363d;
-    }
-    .panel-header {
-        background-color: #161b22;
-        padding: 1rem;
+    /* Header Section */
+    .header-container {
+        background: linear-gradient(90deg, #161b22 0%, #0d1117 100%);
+        padding: 2rem;
         border-bottom: 1px solid #30363d;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+    }
+    .asset-id { font-size: 0.9rem; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+    .status-text { font-size: 2.5rem; font-weight: 800; margin: 0.5rem 0; }
+    .conf-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: rgba(31, 111, 235, 0.2);
+        color: #58a6ff;
+        border-radius: 20px;
         font-weight: 600;
+        font-size: 1rem;
+    }
+    
+    /* Panels */
+    .glass-panel {
+        background: rgba(22, 27, 34, 0.7);
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        padding: 1.5rem;
+        height: 100%;
+        margin-bottom: 1rem;
+    }
+    .panel-title {
+        font-size: 0.85rem;
+        font-weight: 700;
         color: #8b949e;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 0.85rem;
+        letter-spacing: 1px;
+        margin-bottom: 1.25rem;
         display: flex;
         align-items: center;
     }
-    .panel-icon { margin-right: 8px; }
+    .panel-title i { margin-right: 8px; font-size: 1.1rem; }
     
-    /* 4a. Left Panel: Features */
-    .feature-list {
-        padding: 1rem;
-    }
-    .feature-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 12px 0;
-        border-bottom: 1px solid #21262d;
+    /* Metrics */
+    .metric-val { font-size: 2rem; font-weight: 700; color: #f0f6fc; }
+    .metric-label { font-size: 0.8rem; color: #8b949e; }
+    
+    /* Reasoning Bullets */
+    .reasoning-list { list-style: none; padding: 0; margin: 0; }
+    .reasoning-item {
+        padding: 0.75rem;
+        border-left: 3px solid #f85149;
+        background: rgba(248, 81, 73, 0.05);
+        margin-bottom: 0.75rem;
+        border-radius: 0 4px 4px 0;
         font-size: 0.95rem;
     }
-    .feature-key { color: #d2a8ff; font-weight: 700; }
-    .feature-val { color: #f0f6fc; font-weight: 700; font-family: monospace; }
+    .item-normal { border-left-color: #3fb950; background: rgba(63, 185, 80, 0.05); }
     
-    /* 4b. Right Panel: Trace Steps */
-    .trace-container {
-        padding: 1.5rem;
-    }
-    .trace-step {
-        background-color: #0d1117;
-        border: 1px solid #21262d;
-        border-radius: 6px;
+    /* Narrative Box */
+    .narrative-box {
+        background: rgba(210, 168, 255, 0.05);
+        border-left: 4px solid #d2a8ff;
         padding: 1.25rem;
-        margin-bottom: 1rem;
-        position: relative;
-    }
-    .trace-step-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    .step-circle {
-        background-color: #1f6feb;
-        color: white;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.8rem;
-        font-weight: bold;
-        margin-right: 12px;
-    }
-    .node-name {
-        color: #8b949e;
-        font-weight: 700;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-    }
-    .logic-box {
-        background-color: #0d1117;
-        padding: 8px 0;
-        font-family: monospace;
-        font-size: 1.1rem;
+        font-style: italic;
+        line-height: 1.6;
         color: #e6edf3;
-    }
-    .val-highlight { color: #ff7b72; font-weight: bold; } /* Red for values */
-    .result-badge {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-right: 8px;
-    }
-    .res-fired { background-color: #3b2323; color: #ff7b72; border: 1px solid #ff7b72; }
-    .res-pass { background-color: #1a2e23; color: #3fb950; border: 1px solid #3fb950; }
-    
-    /* 5. Custom Tabs (Buttons) */
-    .tab-row {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 1rem;
+        font-size: 1.05rem;
+        border-radius: 0 8px 8px 0;
     }
     
-    /* Footer */
-    .footer-bar {
-        margin-top: 3rem;
-        border-top: 1px solid #30363d;
-        padding-top: 1rem;
+    /* Regulation Box */
+    .reg-box {
+        background: rgba(31, 111, 235, 0.05);
+        border: 1px dashed #30363d;
+        padding: 1rem;
+        border-radius: 8px;
+        color: #c9d1d9;
+        font-size: 0.9rem;
+    }
+    
+    /* Responsibility Footer */
+    .resp-footer {
+        background: #161b22;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
         display: flex;
         justify-content: space-between;
-        color: #484f58;
-        font-size: 0.75rem;
-        font-family: sans-serif;
-        font-weight: 600;
-    }
-    
-    /* Bounding Box Style */
-    .content-box {
-        background-color: #0d1117;
+        align-items: center;
         border: 1px solid #30363d;
-        border-radius: 8px;
-        padding: 1.25rem;
-        margin-bottom: 1rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-    .content-box-header {
-        margin-bottom: 1rem;
-        border-bottom: 1px solid #30363d;
-        padding-bottom: 0.5rem;
     }
 </style>
 """, unsafe_allow_html=True)
 
-
 # -------------------------------------------------
-# State Management
+# Pipeline Orchestration
 # -------------------------------------------------
 def export_trace_to_llm(trace, component="UNKNOWN"):
-    """Saves the current trace to the mt-llm knowledge base for processing."""
-    llm_input_path = os.path.join(PROJECT_ROOT, "..", "mt-llm", "knowledge_base", "post_decision_trace.json")
+    # PROJECT_ROOT is Waste_management root. mt-llm is inside it.
+    llm_input_path = os.path.join(PROJECT_ROOT, "mt-llm", "knowledge_base", "post_decision_trace.json")
     try:
         os.makedirs(os.path.dirname(llm_input_path), exist_ok=True)
-        # Ensure component is in the trace
-        trace_copy = trace.copy()
-        if "component" not in trace_copy:
-            trace_copy["component"] = component
-        # Wrap in expected format
-        data = {"input_trace": trace_copy}
+        data = {"input_trace": trace}
         with open(llm_input_path, "w") as f:
             json.dump(data, f, indent=4)
     except Exception as e:
         st.error(f"Failed to export trace: {e}")
 
-if "simulation_results" not in st.session_state:
-    st.session_state.simulation_results = []
-    
-if "active_event_idx" not in st.session_state:
-    st.session_state.active_event_idx = 0
-    st.session_state.last_exported_idx = -1 # Track export state
-
-if "ai_analysis_cache" not in st.session_state:
-    st.session_state.ai_analysis_cache = {} # Cache idx -> results
-
-if "ai_feedback_state" not in st.session_state:
-    st.session_state.ai_feedback_state = {} # Cache idx -> "Accepted" | "Rejected"
-
-def handle_ai_feedback(idx, status):
-    """Processes user feedback (Accept/Reject) for a specific AI advisory."""
-    st.session_state.ai_feedback_state[idx] = status
-    
-    if status == "Accepted":
-        # Run the KB update script in the background
-        base_path = os.path.join(PROJECT_ROOT, "..", "mt-llm")
-        kb_update_script = os.path.join(base_path, "pipeline_logic", "machine_explainer.py")
-        env = os.environ.copy()
-        env["ACTION"] = "UPDATE_KB"
-        env["NON_INTERACTIVE"] = "1"
-        try:
-            subprocess.run([sys.executable, kb_update_script], cwd=base_path, env=env, capture_output=True)
-        except:
-            pass
-
 def run_ai_pipeline():
-    """Runs the mt-llm pipeline scripts and returns the result."""
     env = os.environ.copy()
     env["NON_INTERACTIVE"] = "1"
-    
-    # Resolve correct Python interpreter
     python_exe = sys.executable
-
-    base_path = os.path.join(PROJECT_ROOT, "..", "mt-llm")
-    input_trace = os.path.join(base_path, "knowledge_base", "post_decision_trace.json")
-    rag_script = os.path.join(base_path, "pipeline_logic", "process_alert_workflow.py")
-    exp_script = os.path.join(base_path, "pipeline_logic", "machine_explainer.py")
-    route_script = os.path.join(base_path, "pipeline_logic", "routing_agent.py")
+    # PROJECT_ROOT is Waste_management root. mt-llm is inside it.
+    base_path = os.path.join(PROJECT_ROOT, "mt-llm")
     
-    if not os.path.exists(input_trace):
-        return {"error": f"Input trace missing at {input_trace}"}
-
+    # We run the consolidated script created earlier if available, 
+    # but here we follow the app.py pattern for granular steps
     try:
-        # 1. Run RAG Workflow
-        rag_res = subprocess.run([python_exe, rag_script], cwd=base_path, env=env, capture_output=True, text=True)
-        if rag_res.returncode != 0:
-            return {"error": f"RAG Stage Failed: {rag_res.stderr}"}
-            
-        # 2. Run Machine Explainer
-        exp_res = subprocess.run([python_exe, exp_script], cwd=base_path, env=env, capture_output=True, text=True)
-        if exp_res.returncode != 0:
-            return {"error": f"Explainer Stage Failed: {exp_res.stderr}"}
-            
-        # 3. Run Routing Agent
-        route_res = subprocess.run([python_exe, route_script], cwd=base_path, env=env, capture_output=True, text=True)
-        if route_res.returncode != 0:
-            return {"error": f"Routing Stage Failed: {route_res.stderr}"}
+        scripts = [
+            os.path.join(base_path, "pipeline_logic", "process_alert_workflow.py"),
+            os.path.join(base_path, "pipeline_logic", "machine_explainer.py"),
+            os.path.join(base_path, "pipeline_logic", "routing_agent.py")
+        ]
+        for script in scripts:
+            subprocess.run([python_exe, script], cwd=base_path, env=env, check=True, capture_output=True)
         
-        # 4. Load Results
+        # Load final results
         rec_path = os.path.join(base_path, "final_recommendation.json")
         exp_path = os.path.join(base_path, "ai_explanation.json")
         route_path = os.path.join(base_path, "dispatch_plan.json")
         
-        recs = {}
-        if os.path.exists(rec_path):
-            with open(rec_path, 'r') as f: recs = json.load(f)
-        
-        expl = {}
-        if os.path.exists(exp_path):
-            with open(exp_path, 'r') as f: expl = json.load(f)
+        with open(rec_path, 'r') as f: recs = json.load(f)
+        with open(exp_path, 'r') as f: expl = json.load(f)
+        with open(route_path, 'r') as f: plan = json.load(f)
             
-        plan = {}
-        if os.path.exists(route_path):
-            with open(route_path, 'r') as f: plan = json.load(f)
-            
-        # Create a payload format expected by UI
         return {**recs, **expl, "dispatch_plan": plan}
     except Exception as e:
         return {"error": str(e)}
 
+# -------------------------------------------------
+# State Management
+# -------------------------------------------------
+if "simulation_results" not in st.session_state:
+    st.session_state.simulation_results = []
+if "active_idx" not in st.session_state:
+    st.session_state.active_idx = 0
+if "cache" not in st.session_state:
+    st.session_state.cache = {}
 
 # -------------------------------------------------
-# UI Components
+# Sidebar Controls
 # -------------------------------------------------
-def render_header():
-    # Centered, UPPERCASE Header
-    st.markdown("""
-    <div style="text-align: center; padding: 1rem 0 2rem 0;">
-        <h1 style="
-            text-transform: uppercase; 
-            font-size: 2.2rem; 
-            font-weight: 800; 
-            letter-spacing: 2px;
-            color: #e6edf3;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        ">
-            <span style="margin-right: 16px;">📊</span> Industrial Trace Engine Desktop Dashboard
-        </h1>
-    </div>
-    """, unsafe_allow_html=True)
-
-def render_llm_panel(trace):
-    idx = st.session_state.active_event_idx
-    cache = st.session_state.ai_analysis_cache
-    feedback = st.session_state.ai_feedback_state
-    
-    if idx not in cache:
-        # Automatic trigger with status message
-        with st.status("🧠 Analyzing decision trace and manuals...", expanded=True) as status:
-            results = run_ai_pipeline()
-            st.session_state.ai_analysis_cache[idx] = results
-            status.update(label="✅ Advisory Generated", state="complete", expanded=False)
-            st.rerun()
-    else:
-        # Show results
-        res = cache[idx]
-        if "error" in res:
-            st.error(f"AI Pipeline Error: {res['error']}")
-            return
-
-        explanation = res.get("explanation", "No explanation generated.")
-        recs = res.get("recommended_action", [])
-        safety = res.get("safety_note", "No safety note provided.")
-        ref = res.get("reference", "Internal Knowledge Base")
-        plan = res.get("dispatch_plan", {})
-        
-        assigned_team = plan.get("assigned_team", "N/A")
-        priority = plan.get("priority", "N/A")
-        route_steps = plan.get("route_steps", [])
-
-        # Consolidate HTML for absolute structure (Remove indentation to avoid MD code blocks)
-        html = f"""<div class="content-box">
-<div class="panel-header content-box-header">
-<span class="panel-icon">🤖</span> AI ANALYSIS & ADVISORY
-</div>
-<div style="margin-bottom: 1.5rem;">
-<div style="color: #d2a8ff; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">AI Narrative</div>
-<div style="color: #e6edf3; font-style: italic; line-height: 1.5; background: rgba(210, 168, 255, 0.05); padding: 1rem; border-radius: 6px; border-left: 3px solid #d2a8ff;">
-"{explanation}"
-</div>
-</div>
-<div style="margin-bottom: 1.5rem;">
-<div style="color: #3fb950; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">Recommended Actions</div>
-<div style="color: #f0f6fc; font-size: 0.9rem;">"""
-        for r in recs:
-            html += f'<div style="margin-bottom: 6px; display: flex;"><span style="color: #3fb950; margin-right: 8px;">•</span> {r}</div>'
-        
-        html += f"""</div>
-</div>
-<div style="margin-bottom: 1.5rem; background: rgba(31, 111, 235, 0.05); padding: 1rem; border-left: 3px solid #1f6feb; border-radius: 6px;">
-<div style="color: #1f6feb; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">Dispatch Plan</div>
-<div style="color: #e6edf3; font-size: 0.9rem; margin-bottom: 8px;">
-<strong>Team:</strong> {assigned_team} &nbsp; | &nbsp; <strong>Priority:</strong> <span style="color: {'#ff7b72' if priority in ['HIGH', 'CRITICAL'] else '#d29922' if priority == 'MEDIUM' else '#3fb950'};">{priority}</span>
-</div>
-<div style="color: #f0f6fc; font-size: 0.85rem;">"""
-        if route_steps:
-            for s in route_steps:
-                html += f'<div style="margin-bottom: 4px;"><strong>Step {s["step"]}:</strong> {s["instruction"]}</div>'
-        else:
-            html += f'<div>No routing required.</div>'
-            
-        html += f"""</div>
-</div>
-<div style="padding: 10px; background: rgba(218, 54, 51, 0.1); border: 1px solid #da3633; border-radius: 6px; margin-bottom: 0.5rem;">
-<div style="color: #ff7b72; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px;">⚠ Safety Note</div>
-<div style="color: #f0f6fc; font-size: 0.85rem;">{safety}</div>
-</div>
-<div style="color: #8b949e; font-size: 0.75rem; display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid #30363d; margin-top: 1rem;">
-<span>Source: {ref}</span>
-<span>Powered by FLAN-T5-Small</span>
-</div>
-</div>"""
-        st.markdown(html, unsafe_allow_html=True)
-        
-        # Feedback Buttons Row - ONLY if NOT NORMAL
-        decision = trace.get("decision", "NORMAL")
-        if decision != "NORMAL":
-            if idx not in feedback:
-                st.markdown('<div style="margin-top: 1rem;"></div>', unsafe_allow_html=True)
-                f_col1, f_col2 = st.columns(2)
-                with f_col1:
-                    if st.button("✅ ACCEPT", key=f"acc_{idx}", use_container_width=True):
-                        handle_ai_feedback(idx, "Accepted")
-                        st.rerun()
-                with f_col2:
-                    if st.button("❌ REJECT", key=f"rej_{idx}", use_container_width=True):
-                        handle_ai_feedback(idx, "Rejected")
-                        st.rerun()
-            else:
-                status_color = "#3fb950" if feedback[idx] == "Accepted" else "#da3633"
-                st.markdown(f"""
-                    <div style="text-align: center; color: {status_color}; font-weight: bold; padding: 0.5rem; border: 1px solid {status_color}; border-radius: 4px; margin-top: 1rem;">
-                        Feedback Recorded: {feedback[idx]}
-                    </div>
-                """, unsafe_allow_html=True)
-
-def render_status_banner(trace, component):
-    decision = trace.get("decision", "UNKNOWN")
-    conf = trace.get("final_confidence", 0.0)
-    
-    css_class = "banner-normal"
-    if decision == "DANGER": css_class = "banner-danger"
-    elif decision == "BORDERLINE": css_class = "banner-borderline"
-    
-    # 3. STATUS BANNER
-    st.markdown(f"""
-    <div class="status-banner {css_class}">
-        <div style="font-size: 1.25rem; display: flex; align-items: center;">
-            <span style="font-size: 1.5rem; margin-right: 12px;">⚠</span> 
-            STATUS: {decision}
-            <span style="opacity: 0.6; margin: 0 1rem;">|</span>
-            <span style="font-size: 1rem; font-weight: normal;">Severity Score: {conf:.2f}</span>
-        </div>
-        <div style="text-align: right;">
-            <div style="font-size: 0.7rem; opacity: 0.8; letter-spacing: 1px;">ACTIVE MONITORING</div>
-            <div style="font-size: 1rem;">COMPONENT: {component}</div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-def render_features_panel(result):
-    # Construct FULL HTML string including the bounding box
-    html = '<div class="content-box">'
-    
-    # Internal Header
-    html += """
-    <div class="panel-header content-box-header">
-        <span class="panel-icon">📡</span> EXTRACTED FEATURES
-    </div>
-    """
-    
-    # Content
-    html += '<div class="feature-list">'
-    features = result["features"]
-    for k, v in features.items():
-        html += f'<div class="feature-item"><span class="feature-key">{k}</span><span class="feature-val">{v}</span></div>'
-    html += '</div></div>' # Close content and box
-    
-    st.markdown(html, unsafe_allow_html=True)
-
-def render_trace_panel(trace):
-    # Start Box
-    full_html = '<div class="content-box">'
-    
-    # Header
-    full_html += """
-    <div class="panel-header content-box-header">
-        <span class="panel-icon">🔗</span> DECISION TRACE & REASONING
-    </div>
-    """
-    
-    # Steps
-    reasoning = trace.get("reasoning_trace", [])
-    for i, step in enumerate(reasoning, 1):
-        rule = step.get("rule", "UNKNOWN")
-        feature_name = step.get("feature", "unknown_sensor")
-        val = step.get("feature_value", 0)
-        thresh = step.get("threshold", 0)
-        comp = step.get("comparison", ">")
-        res = step.get("rule_result", "N/A")
-        cond_text = "Condition check"
-        if res == "FIRED": cond_text = "Threshold exceeded"
-        
-        res_class = "res-fired" if res == "FIRED" else "res-pass"
-        val_style = "val-highlight" if res == "FIRED" else ""
-        
-        step_html = f'<div class="trace-step">'
-        step_html += f'<div class="trace-step-header"><span class="step-circle">{i}</span><span class="node-name">NODE: {rule}</span></div>'
-        step_html += f'<div class="logic-box"><span style="font-size: 0.8em; color: #8b949e; margin-right: 8px;">[SENSOR: {feature_name}]</span> Value: <span class="{val_style}">{val}</span> {comp} Threshold: {thresh}</div>'
-        step_html += f'<div style="margin-top: 8px; display: flex; align-items: center;"><span class="result-badge {res_class}">RESULT: {res}</span><span style="font-size: 0.8rem; color: #8b949e;">Condition: {cond_text}</span></div>'
-        step_html += '</div>'
-        full_html += step_html
-        
-    full_html += '</div>' # Close Box
-    st.markdown(full_html, unsafe_allow_html=True)
-
-
-# -------------------------------------------------
-# Main Layout Logic
-# -------------------------------------------------
-render_header()
-
-# Initialize results variable safe-guarded
-results = st.session_state.simulation_results
-
-# 2. CONTROLS (Events Left, Run Right) - ALWAYS RENDERED
-st.markdown("---")
-col_controls, col_run = st.columns([3, 1])
-
-with col_controls:
-    if results:
-        # Event Buttons - Aligned horizontally
-        cols = st.columns(3)
-        def set_tab(idx): st.session_state.active_event_idx = idx
-        
-        for i in range(3):
-            if i < len(results):
-                label = f"Event {i+1}"
-                is_active = (i == st.session_state.active_event_idx)
-                if cols[i].button(label, key=f"tab_{i}", type="primary" if is_active else "secondary", use_container_width=True):
-                    set_tab(i)
-                    # Export the clicked trace
-                    export_trace_to_llm(results[i]["trace"], results[i].get("component"))
-                    st.rerun()
-            else:
-                cols[i].button(f"Event {i+1}", disabled=True, key=f"tab_disable_{i}", use_container_width=True)
-
-with col_run:
-     # No container, button first for perfect alignment
-     if st.button("▶ Run Simulation", type="primary", use_container_width=True):
-        with st.spinner("Loading..."):
+with st.sidebar:
+    st.title("⚙️ Controls")
+    if st.button("🚀 Run Live Simulation", type="primary", use_container_width=True):
+        with st.status("Generating data...", expanded=False):
             st.session_state.simulation_results = run_live_simulation()
-            # Export the first trace immediately
             if st.session_state.simulation_results:
-                first_res = st.session_state.simulation_results[0]
-                export_trace_to_llm(first_res["trace"], first_res.get("component"))
-        st.session_state.active_event_idx = 0
+                export_trace_to_llm(st.session_state.simulation_results[0]["trace"])
+        st.session_state.active_idx = 0
+        st.session_state.cache = {}
         st.rerun()
-     # Marker after button to anchor CSS strictly to this column
-     st.markdown('<div class="run-marker"></div>', unsafe_allow_html=True)
 
-# 3. CONTENT (Only if results exist)
-if results:
-    # Validation of index
-    if st.session_state.active_event_idx >= len(results):
-        st.session_state.active_event_idx = 0
-        
-    active_res = results[st.session_state.active_event_idx]
-    active_trace = active_res["trace"]
-    # --- PROCEED WITH LAYOUT ---
+    if st.session_state.simulation_results:
+        st.markdown("---")
+        st.markdown("### 📡 Select Event")
+        for i in range(len(st.session_state.simulation_results)):
+            label = f"Event {i+1} : {st.session_state.simulation_results[i]['trace']['decision']}"
+            if st.button(label, use_container_width=True, key=f"btn_{i}", 
+                         type="primary" if i == st.session_state.active_idx else "secondary"):
+                st.session_state.active_idx = i
+                export_trace_to_llm(st.session_state.simulation_results[i]["trace"])
+                st.rerun()
 
-    # 3. STATUS BANNER (Full Width)
-    # We use a container to span width
-    with st.container():
-        st.markdown('<div style="margin-top: 1rem;"></div>', unsafe_allow_html=True) # Spacer
-        render_status_banner(active_trace, active_res["component"])
-        st.markdown('<div style="margin-bottom: 2rem;"></div>', unsafe_allow_html=True) # Spacer
+# -------------------------------------------------
+# Main Dashboard UI
+# -------------------------------------------------
+# Auto-run simulation on first load if no results exist
+if not st.session_state.simulation_results:
+    with st.status("🚀 Initializing Wastewater Monitoring Engine...", expanded=True):
+        st.write("Generating live sensor simulation (BOD Spike Scenario)...")
+        st.session_state.simulation_results = run_live_simulation()
+        if st.session_state.simulation_results:
+            export_trace_to_llm(st.session_state.simulation_results[0]["trace"])
+            st.write("✅ Ready! Loading dashboard...")
+    st.rerun()
 
-    # 4. CONTENT GRID (2 Columns)
-    grid_left, grid_right = st.columns(2)
+active_data = st.session_state.simulation_results[st.session_state.active_idx]
+trace = active_data["trace"]
+features = active_data["features"]
+
+# 1️⃣ SYSTEM STATUS HEADER
+status_map = {
+    "ALARM": {"color": "#f85149", "label": "🚨 DANGER - EXTREME VIOLATION"},
+    "WARNING": {"color": "#d29922", "label": "⚠️ WARNING - MODERATE SPIKE"},
+    "NORMAL": {"color": "#3fb950", "label": "✅ SYSTEM NORMAL"},
+}
+config = status_map.get(trace["decision"], status_map["NORMAL"])
+
+st.markdown(f"""
+<div class="header-container">
+    <div class="asset-id">Asset ID: {active_data['component']} • {active_data['timestamp']}</div>
+    <div class="status-text" style="color: {config['color']};">{config['label']}</div>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+        <div class="conf-badge">Confidence: {int(trace['confidence_score']*100)}%</div>
+        <div style="color: #8b949e;">Severity: <span style="color: {config['color']}; font-weight: bold;">{trace['severity']}</span></div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Run AI Pipeline if needed
+if st.session_state.active_idx not in st.session_state.cache:
+    with st.spinner("🧠 AI interpreting trace..."):
+        st.session_state.cache[st.session_state.active_idx] = run_ai_pipeline()
+    st.rerun()
+
+ai_results = st.session_state.cache[st.session_state.active_idx]
+
+# Layout Grid
+col1, col2 = st.columns([1, 1.5], gap="large")
+
+with col1:
+    # 2️⃣ LIVE SENSOR READINGS
+    st.markdown("""<div class="panel-title">📡 Live Sensor Readings</div>""", unsafe_allow_html=True)
+    m1, m2 = st.columns(2)
+    m3, m4 = st.columns(2)
     
-    # --- LEFT COLUMN CONTENT ---
-    with grid_left:
-        # BOX 1: EXTRACTED FEATURES
-        render_features_panel(active_res)
-        
-        # BOX 2: RAW TRACE DATA
-        # Manual Box Construction
-        json_html = '<div class="content-box">'
-        json_html += '<div class="panel-header content-box-header"><span class="panel-icon">📜</span> RAW TRACE DATA</div>'
-        json_html += '<div style="height: 300px; overflow-y: auto; padding-right: 10px;">'
-        for k, v in active_trace.items():
-            disp_val = v
-            if isinstance(v, (dict, list)):
-                sanitized_val = str(v).replace("<", "&lt;").replace(">", "&gt;")
-                disp_val = f"<span style='opacity:0.6; font-size:0.85em;'>{sanitized_val}</span>"
-            json_html += f'<div class="feature-item"><span class="feature-key">{k}</span><span class="feature-val">{disp_val}</span></div>'
-        json_html += "</div></div>" # Close list and box
-        st.markdown(json_html, unsafe_allow_html=True)
+    with m1: st.metric("pH Level", f"{features['pH']:.2f}")
+    with m2: st.metric("BOD (mg/L)", f"{features['BOD']:.1f}", delta=f"{features['BOD']-30:.1f}" if features['BOD']>30 else None, delta_color="inverse")
+    with m3: st.metric("COD (mg/L)", f"{features['COD']:.1f}")
+    with m4: st.metric("Temp (°C)", f"{features['Temp']:.1f}")
 
-    # --- RIGHT COLUMN CONTENT ---
-    with grid_right:
-        # BOX 3: LLM
-        render_llm_panel(active_trace)
-        
-        # BOX 4: DECISION TRACE
-        render_trace_panel(active_trace)
-        
-    # FOOTER
-    st.markdown("""
-    <div class="footer-bar">
-        <div>IOT-TRACE ENGINE v1.0.4</div>
-        <div>STATUS: ONLINE • LAST UPDATE: NOW</div>
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 3️⃣ DECISION TRACE (CORE DIFFERENTIATOR)
+    st.markdown("""<div class="panel-title">🔗 Decision Reasoning (Trace)</div>""", unsafe_allow_html=True)
+    reasoning = trace.get("reasoning_trace", [])
+    if reasoning:
+        html = '<div class="reasoning-list">'
+        for item in reasoning:
+            html += f'<div class="reasoning-item">{item}</div>'
+        html += '</div>'
+        st.markdown(html, unsafe_allow_html=True)
+    else:
+        st.markdown('<div class="reasoning-item item-normal">All sensor values within regulatory compliance limits.</div>', unsafe_allow_html=True)
+
+with col2:
+    # 5️⃣ LLM EXPLANATION
+    st.markdown("""<div class="panel-title">🤖 Expert Interpretation</div>""", unsafe_allow_html=True)
+    explanation = ai_results.get("explanation", "Generating...")
+    st.markdown(f'<div class="narrative-box">{explanation}</div>', unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 4️⃣ REGULATORY CONTEXT
+    st.markdown("""<div class="panel-title">📜 Regulatory Compliance Context</div>""", unsafe_allow_html=True)
+    ref = ai_results.get("reference", "Internal Guidelines")
+    actions = ai_results.get("recommended_action", ["No specific regulatory notes found."])
+    # Extract the main rule snippet if it's the first rec (common in our RAG stub)
+    reg_text = actions[0] if actions else "Compliance standard: 30 mg/L BOD limit."
+    st.markdown(f"""
+    <div class="reg-box">
+        <strong>Reference:</strong> {ref}<br><br>
+        {reg_text}
     </div>
     """, unsafe_allow_html=True)
 
-else:
-    # Empty State
-    st.info("System Ready. Click 'Run Simulation' to begin analysis.")
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 6️⃣ RECOMMENDED ACTION PLAN
+    st.markdown("""<div class="panel-title">🛠️ Recommended Action Plan</div>""", unsafe_allow_html=True)
+    # If the first rec was the reg snippet, use others for actions
+    plan_actions = actions[1:] if len(actions) > 1 else actions
+    if not plan_actions or plan_actions == [reg_text]:
+        plan_actions = ["Continue regular monitoring.", "Record reading in logbook."]
+        
+    for act in plan_actions:
+        st.markdown(f"- {act}")
+
+# 7️⃣ ROUTING / RESPONSIBILITY SECTION
+st.markdown("<br>", unsafe_allow_html=True)
+plan = ai_results.get("dispatch_plan", {})
+role = plan.get("role", "Operations Team")
+urgency = plan.get("urgency", "Normal")
+
+st.markdown(f"""
+<div class="resp-footer">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem;">📬</span>
+        <div>
+            <div style="font-size: 0.75rem; color: #8b949e; text-transform: uppercase;">Notified Role</div>
+            <div style="font-weight: 700; color: #58a6ff;">{role}</div>
+        </div>
+    </div>
+    <div style="text-align: right;">
+        <div style="font-size: 0.75rem; color: #8b949e; text-transform: uppercase;">Urgency Level</div>
+        <div style="font-weight: 700; color: {'#f85149' if 'DANGER' in urgency.upper() or 'IMMEDIATE' in urgency.upper() else '#d29922' if 'WARNING' in urgency.upper() else '#3fb950'};">{urgency}</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.caption("IOT-Trace AI Engine v1.2 • Powered by FLAN-T5-Small • © 2026 Wastewater Intelligence")

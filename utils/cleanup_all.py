@@ -41,14 +41,14 @@ def cleanup():
                     if os.path.isfile(f_path):
                         os.remove(f_path)
                         deleted_count += 1
-                print(f"✓ Cleaned directory: {path}")
+                print(f"[OK] Cleaned directory: {path}")
             else:
                 # Remove individual files
                 os.remove(abs_path)
                 deleted_count += 1
-                print(f"✓ Removed file: {path}")
+                print(f"[OK] Removed file: {path}")
         except Exception as e:
-            print(f"✗ Failed to clean {path}: {e}")
+            print(f"[FAIL] Failed to clean {path}: {e}")
 
     print(f"\nCleanup complete. Removed {deleted_count} artifact(s).")
 

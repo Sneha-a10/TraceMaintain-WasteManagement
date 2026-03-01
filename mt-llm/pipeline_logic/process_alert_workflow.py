@@ -8,8 +8,9 @@ from typing import List, Dict, Any
 import logging
 import urllib.request
 import urllib.error
-# import numpy as np
-# from sentence_transformers import SentenceTransformer
+import logging
+import urllib.request
+import urllib.error
 from typing import List, Dict, Any
 
 # Configure logging
@@ -23,6 +24,7 @@ def get_model():
     global _embedding_model
     if _embedding_model is None:
         logging.info(f"Loading embedding model: {MODEL_NAME}")
+        from sentence_transformers import SentenceTransformer
         _embedding_model = SentenceTransformer(MODEL_NAME)
     return _embedding_model
 
@@ -61,6 +63,7 @@ def retrieve_knowledge(decision: str, local_kb_path: str) -> List[Dict]:
     """
     Retrieve knowledge chunks using semantic vector search.
     """
+    import numpy as np
     logging.info(f"Loading local knowledge base: {local_kb_path}")
     kb_data = load_json_file(local_kb_path)
     

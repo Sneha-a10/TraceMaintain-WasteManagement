@@ -1,43 +1,32 @@
-
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
 .Python
 env/
 .venv/
 .env
 .pytest_cache/
 
-# Project Specific (Generated Output)
+# Project Generated Output
 traces/
 trace-engine/traces/
 *.log
-interaction_logs.json
-ai_explanation.json
-final_recommendation.json
+*.json
+*.csv
+!simulated_readings.json
+!simulated_readings.csv
+!knowledge_base/*.json
 
 # Data files (generated simulation output — not tracked)
-data-n-sensor/*.json
-data-n-sensor/*.csv
 data-n-sensor/output/
 mt-llm/knowledge_base/post_decision_trace.json
 
 # Environment/OS
 .DS_Store
-.env
-.venv/
-env/
-__pycache__/
 
 # AI/Agent metadata
 .gemini/
 .agents/
 .agent/
 brain/
-
-# Temp/Misc
-sensor_packets.json
-simulated_assets.csv
-extracted_features.json

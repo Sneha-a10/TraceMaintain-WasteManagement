@@ -133,7 +133,7 @@ def run_single_scenario(scenario_name: str, ticks: int = 80) -> None:
         sys.exit(1)
 
     print(f"\n{'='*60}")
-    print(f"  MODE: SCENARIO ISOLATION — {scenario_name}")
+    print(f"  MODE: SCENARIO ISOLATION - {scenario_name}")
     print(f"  {SCENARIO_REGISTRY[scenario_name]['description']}")
     print(f"{'='*60}\n")
 
@@ -160,7 +160,7 @@ def run_single_scenario(scenario_name: str, ticks: int = 80) -> None:
     # Save output
     out_path = os.path.join(OUTPUT_DIR, "simulated_readings.json")
     save_stream_to_file(readings, out_path)
-    print(f"\n✅ Scenario output → {out_path}")
+    print(f"\n[OK] Scenario output -> {out_path}")
 
 
 # ============================================================================
@@ -215,7 +215,7 @@ def main():
     elif args.mode == "scenario":
         scenario = args.scenario
         if not scenario:
-            print("❌ Please specify --scenario <NAME>")
+            print("[FAIL] Please specify --scenario <NAME>")
             print(f"   Available: {list(SCENARIO_REGISTRY.keys())}")
             sys.exit(1)
         run_single_scenario(scenario_name=scenario, ticks=args.ticks)

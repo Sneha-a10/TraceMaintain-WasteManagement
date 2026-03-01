@@ -39,15 +39,19 @@ class CityRoutingAgent:
         """
         severity = decision_trace.get("severity", "LOW")
         
-        # Determinstic logic
-        if severity in ["HIGH", "CRITICAL"]:
+        # Differentiated logic for demo
+        if severity == "CRITICAL":
             role = "Environmental Officer"
-            urgency = "CRITICAL"
-            action = "Immediate on-site audit and discharge stoppage."
+            urgency = "DANGER / IMMEDIATE"
+            action = "EMERGENCY: Immediate discharge stoppage and regulatory notification."
+        elif severity == "HIGH":
+            role = "Senior Plant Manager"
+            urgency = "WARNING / HIGH"
+            action = "URGENT: Adjust aeration tanks and start secondary sampling."
         elif severity == "MEDIUM":
             role = "Floor Engineer"
-            urgency = "HIGH"
-            action = "Check aeration tanks and adjust blower frequency."
+            urgency = "MEDIUM"
+            action = "Check blower frequency and monitor settling tanks."
         else:
             role = "Maintenance Technician"
             urgency = "NORMAL"

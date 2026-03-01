@@ -118,14 +118,30 @@ class MachineExplainer:
 
         # Static High-Quality Generation Logic
         if "BOD" in trace_summary:
-            explanation = (
-                f"A critical anomaly was detected where {trace_summary}. "
-                f"According to the retrieved regulatory standards in {decision_trace.get('reference', 'guidelines')}, "
-                f"the permissible limit for BOD is 30 mg/L. This violation is significant as it indicates "
-                f"high organic loading which can deplete dissolved oxygen in receiving water bodies, "
-                f"therefore necessitating immediate aeration adjustments as per CEQMS protocols."
-            )
-            action_list = ["Adjust aeration blower frequency immediately.", "Sample secondary clarifier effluent for TSS."]
+            if decision == "ALARM":
+                explanation = (
+                    f"CRITICAL: An extreme violation was detected where {trace_summary}. "
+                    f"According to the retrieved regulatory standards in {decision_trace.get('reference', 'guidelines')}, "
+                    f"the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in "
+                    f"biological treatment, requiring immediate emergency response to prevent environmental damage."
+                )
+                action_list = [
+                    "Shut down primary effluent discharge immediately.",
+                    "Notify Environmental Officer for emergency audit.",
+                    "Verify secondary clarifier and aeration blower status."
+                ]
+            else: # WARNING
+                explanation = (
+                    f"An anomaly was detected where {trace_summary}. "
+                    f"According to the retrieved regulatory standards in {decision_trace.get('reference', 'guidelines')}, "
+                    f"the permissible limit for BOD is 30 mg/L. While not yet critical, this indicates "
+                    f"high organic loading that requires proactive adjustment to maintain compliance."
+                )
+                action_list = [
+                    "Adjust aeration blower frequency to increase oxygen transfer.",
+                    "Monitor settling tank performance over the next 2 hours.",
+                    "Sample secondary effluent for TSS and COD verification."
+                ]
         else:
             explanation = f"An anomaly was detected: {trace_summary}. This exceeds operational thresholds and requires investigation."
             action_list = ["Conduct a standard field inspection.", "Verify utility sensor telemetry."]

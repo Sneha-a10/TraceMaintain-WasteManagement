@@ -115,7 +115,7 @@ class ScenarioEngine:
         self._scenario_config = self._build_config(scenario)
 
         print(
-            f"[ScenarioEngine] ▶ Activated: {scenario} | "
+            f"[ScenarioEngine] [START] Activated: {scenario} | "
             f"{SCENARIO_REGISTRY[scenario]['description']}"
         )
 
@@ -125,7 +125,7 @@ class ScenarioEngine:
         self._step_count = 0
         self._scenario_config = {}
         self.asset.reset_drifts()
-        print("[ScenarioEngine] ■ Deactivated — returning to NORMAL.")
+        print("[ScenarioEngine] [STOP] Deactivated - returning to NORMAL.")
 
     # ------------------------------------------------------------------ #
     #  Per-tick step                                                       #
@@ -279,7 +279,7 @@ class ScenarioEngine:
             }
         elif scenario == "BOD_SPIKE":
             return {
-                "peak": random.uniform(30.0, 55.0),  # mg/L above baseline
+                "peak": random.uniform(45.0, 65.0),  # mg/L above baseline
             }
         elif scenario == "FLOW_SURGE":
             return {
