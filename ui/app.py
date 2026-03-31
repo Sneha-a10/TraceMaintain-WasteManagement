@@ -4,6 +4,7 @@ import os
 import subprocess
 import json
 import datetime
+import requests
 
 # -------------------------------------------------
 # Path Configuration
@@ -13,6 +14,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(os.path.join(PROJECT_ROOT, "trace-engine"))
 
 from integration.run_live_simulation import run_live_simulation
+from trace_engine.rule_engine import RuleEngine
 
 # -------------------------------------------------
 # Streamlit Page Config
@@ -173,6 +175,49 @@ def run_ai_pipeline():
         return {"error": str(e)}
 
 # -------------------------------------------------
+# Networking & Live Stream Integration
+# -------------------------------------------------
+def fetch_live_stream_data():
+    """Fetches real-time pure telemetry from the independent network simulator and runs the local Rule Engine."""
+    try:
+        resp = requests.get("http://localhost:8000/api/latest", timeout=3)
+        if resp.status_code == 200:
+            data = resp.json()
+            if not data:
+                return []
+                
+            engine = RuleEngine()
+            results = []
+            for r in data:
+                event = {
+                    "asset_id": r.get("asset_id", "STP_DEMO"),
+                    "timestamp": r.get("timestamp"),
+                    "pH": r.get("pH"),
+                    "BOD_mg_L": r.get("BOD_mg_L"),
+                    "COD_mg_L": r.get("COD_mg_L"),
+                    "TSS_mg_L": r.get("TSS_mg_L"),
+                    "temperature_C": r.get("temperature_C", 25.0)
+                }
+                trace, trace_path = engine.evaluate(event)
+                results.append({
+                    "component": event["asset_id"],
+                    "timestamp": event["timestamp"],
+                    "features": {
+                        "pH": event["pH"],
+                        "BOD": event["BOD_mg_L"],
+                        "COD": event["COD_mg_L"],
+                        "TSS": event["TSS_mg_L"],
+                        "Temp": event["temperature_C"]
+                    },
+                    "trace": trace,
+                    "trace_path": trace_path
+                })
+            return results
+    except Exception as e:
+        print(f"Failed to fetch external live stream: {e}")
+    return []
+
+# -------------------------------------------------
 # State Management
 # -------------------------------------------------
 if "simulation_results" not in st.session_state:
@@ -186,8 +231,22 @@ if "cache" not in st.session_state:
 # Sidebar Controls
 # -------------------------------------------------
 with st.sidebar:
-    st.title("⚙️ Controls")
-    if st.button("🚀 Run Live Simulation", type="primary", use_container_width=True):
+    st.title("\u2699\ufe0f Controls")
+    
+    # 1. New Live Network Integration Button
+    if st.button("\U0001f4e1 Connect to Live IoT API", type="primary", use_container_width=True):
+        with st.status("Fetching streaming telemetry...", expanded=False):
+            st.session_state.simulation_results = fetch_live_stream_data()
+            if st.session_state.simulation_results:
+                export_trace_to_llm(st.session_state.simulation_results[0]["trace"])
+        st.session_state.active_idx = 0
+        st.session_state.cache = {}
+        st.rerun()
+        
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. Old Built-in Engine demo
+    if st.button("\U0001f680 Built-in Engine Demo", type="secondary", use_container_width=True):
         with st.status("Generating data...", expanded=False):
             st.session_state.simulation_results = run_live_simulation()
             if st.session_state.simulation_results:

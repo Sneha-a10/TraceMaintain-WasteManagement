@@ -1,9 +1,9 @@
 {
-    "explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=69.36, threshold=30.0) BOD exceeded 60 mg/L (Extreme Violation) (value=69.36, threshold=60.0). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+    "explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=70.67, threshold=30.0) BOD exceeded 60 mg/L (Extreme Violation) (value=70.67, threshold=60.0). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
     "recommended_action": [
         "Shut down primary effluent discharge immediately.",
         "Notify Environmental Officer for emergency audit.",
         "Verify secondary clarifier and aeration blower status."
     ],
-    "timestamp": "2026-03-01T23:22:21.231906"
+    "timestamp": "2026-03-31T22:13:27.983313"
 }

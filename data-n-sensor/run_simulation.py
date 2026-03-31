@@ -28,6 +28,9 @@ import json
 import os
 import sys
 import argparse
+import time
+import random
+import threading
 
 from sensor_simulation import WastewaterAsset
 from scenario_engine import ScenarioEngine, SCENARIO_REGISTRY
@@ -43,7 +46,9 @@ from output_formatter import (
     save_to_csv,
     generate_telemetry_summary,
     print_telemetry_summary,
+    format_reading,
 )
+from network_client import IoTNetworkClient
 
 
 # ============================================================================
@@ -119,8 +124,80 @@ def run_live_mode(ticks: int, interval: float = 5.0) -> None:
         output_file=os.path.join(OUTPUT_DIR, "live_stream.json"),
     )
 
-    report = generate_violation_report(readings)
-    print_violation_report(report)
+    report = generate_telemetry_summary(readings)
+    print_telemetry_summary(report)
+
+
+def _asset_stream_worker(asset_config: dict, endpoint: str, interval: float, stop_event: threading.Event) -> None:
+    """Thread worker: continually polls a single asset and streams to API."""
+    asset_id = asset_config["asset_id"]
+    client = IoTNetworkClient(endpoint=endpoint)
+    
+    asset = WastewaterAsset(asset_id, sampling_interval=interval)
+    engine = ScenarioEngine(asset)
+    schedule = DEFAULT_CAMPUS_SCHEDULE
+    
+    tick = 0
+    print(f"[WORKER START] Device {asset_id} streaming to {endpoint} every {interval}s")
+    
+    while not stop_event.is_set():
+        active_scenario_name = schedule.get_scenario_at_tick(tick)
+        if active_scenario_name and asset.active_scenario != active_scenario_name:
+            engine.activate(active_scenario_name)
+        engine.step()
+        asset.update_state()
+        
+        raw = asset.to_json()
+        raw["tick"] = tick
+        reading = format_reading(raw, include_tick=True)
+        
+        jitter = random.uniform(0.0, 1.5)
+        time.sleep(jitter)
+        
+        success = client.send_telemetry(reading)
+        
+        if success:
+            print(f"[Tick {tick:>4}] [POST OK] {asset_id} | pH={reading['pH']:.2f} Flow={reading['flow_rate_m3_hr']:.1f} m\u00b3/hr")
+        
+        tick += 1
+        remaining = max(0.1, interval - jitter)
+        stop_event.wait(remaining)
+
+
+def run_stream_mode(endpoint: str, interval: float = 5.0) -> None:
+    """
+    Runs all campus assets independently in a multithreaded stream.
+    Mimics real distributed IoT devices making POST requests.
+    """
+    print(f"\n{'='*60}")
+    print(f"  MODE: NETWORK STREAMING")
+    print(f"  Endpoint : {endpoint}")
+    print(f"  Interval : {interval}s (with network jitter)")
+    print(f"  Devices  : {len(CAMPUS_ASSETS)}")
+    print(f"  Press Ctrl+C to stop.")
+    print(f"{'='*60}\n")
+    
+    stop_event = threading.Event()
+    threads = []
+    
+    for config in CAMPUS_ASSETS:
+        t = threading.Thread(
+            target=_asset_stream_worker,
+            args=(config, endpoint, interval, stop_event),
+            daemon=True
+        )
+        t.start()
+        threads.append(t)
+        
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("\n[STOPPING] Ctrl+C received. Shutting down device streams...")
+        stop_event.set()
+        for t in threads:
+            t.join(timeout=2.0)
+        print("[STOPPED] All streams terminated.")
 
 
 def run_single_scenario(scenario_name: str, ticks: int = 80) -> None:
@@ -173,9 +250,15 @@ def parse_args():
     )
     parser.add_argument(
         "--mode",
-        choices=["batch", "live", "scenario"],
+        choices=["batch", "live", "scenario", "stream"],
         default="batch",
         help="Simulation mode (default: batch)",
+    )
+    parser.add_argument(
+        "--endpoint",
+        type=str,
+        default="http://localhost:8000/ingest",
+        help="API Endpoint for --mode stream (default: http://localhost:8000/ingest)",
     )
     parser.add_argument(
         "--ticks",
@@ -211,6 +294,9 @@ def main():
 
     elif args.mode == "live":
         run_live_mode(ticks=args.ticks, interval=args.interval)
+
+    elif args.mode == "stream":
+        run_stream_mode(endpoint=args.endpoint, interval=args.interval)
 
     elif args.mode == "scenario":
         scenario = args.scenario
