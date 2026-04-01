@@ -1,18 +1,18 @@
 {
     "input_trace": {
-        "alert_id": "alert_faef5ad6",
-        "component_id": "STP_DEMO",
-        "timestamp": "2026-03-31T16:43:16.314321",
+        "alert_id": "alert_d2534a0a",
+        "component_id": "STP_CANTEEN",
+        "timestamp": "2026-03-31T19:34:21.673715",
         "decision": "ALARM",
         "severity": "CRITICAL",
-        "confidence_score": 0.8,
+        "confidence_score": 0.7,
         "rules_triggered": [
             "BOD_MODERATE_SPIKE",
-            "BOD_EXTREME_SPIKE"
+            "pH_ALKALINE_DRIFT"
         ],
         "reasoning_trace": [
-            "BOD exceeded 30 mg/L (Moderate Exposure) (value=70.67, threshold=30.0)",
-            "BOD exceeded 60 mg/L (Extreme Violation) (value=70.67, threshold=60.0)"
+            "BOD exceeded 30 mg/L (Moderate Exposure) (value=30.87, threshold=30.0)",
+            "pH rose above alkaline limit (8.5) (value=10.15, threshold=8.5)"
         ],
         "expected_behavior": "NORMAL",
         "observed_behavior": "ANOMALOUS",

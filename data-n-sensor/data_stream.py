@@ -76,18 +76,19 @@ class ScenarioSchedule:
 # ============================================================================
 
 DEFAULT_CAMPUS_SCHEDULE = ScenarioSchedule([
-    {"tick": 0,   "scenario": "NORMAL"},             # Normal startup
-    {"tick": 30,  "scenario": "FLOW_SURGE"},          # Morning tank flush
-    {"tick": 55,  "scenario": "NORMAL"},              # Returns to normal
-    {"tick": 80,  "scenario": "COD_GRADUAL"},         # Treatment plant gradually struggling
-    {"tick": 130, "scenario": "CONTAMINATION_SPIKE"}, # Canteen lunch discharge
-    {"tick": 155, "scenario": "NORMAL"},              # Spike clears
-    {"tick": 180, "scenario": "pH_DRIFT"},            # Chemical mishandling
-    {"tick": 210, "scenario": "NORMAL"},              # Corrected
-    {"tick": 230, "scenario": "TSS_OVERLOAD"},        # Afternoon construction runoff
-    {"tick": 265, "scenario": "NORMAL"},              # Clears
-    {"tick": 290, "scenario": "GRADUAL_DEGRADATION"}, # End-of-day plant underperformance
-    {"tick": 350, "scenario": "NORMAL"},              # Restored
+    {"tick": 0,   "scenario": "NORMAL"},             # Startup
+    {"tick": 3,   "scenario": "FLOW_SURGE"},          # Happens almost immediately
+    {"tick": 8,   "scenario": "NORMAL"},              # Clears
+    {"tick": 12,  "scenario": "COD_GRADUAL"},         # Struggling
+    {"tick": 18,  "scenario": "NORMAL"},
+    {"tick": 22,  "scenario": "CONTAMINATION_SPIKE"}, # Huge disaster
+    {"tick": 28,  "scenario": "NORMAL"},              
+    {"tick": 33,  "scenario": "pH_DRIFT"},            
+    {"tick": 39,  "scenario": "NORMAL"},              
+    {"tick": 44,  "scenario": "BOD_SPIKE"},        
+    {"tick": 50,  "scenario": "NORMAL"},              
+    {"tick": 55,  "scenario": "GRADUAL_DEGRADATION"}, 
+    {"tick": 65,  "scenario": "NORMAL"},
 ])
 
 

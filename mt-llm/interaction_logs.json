@@ -370,5 +370,137 @@
         },
         "output_explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=70.67, threshold=30.0) BOD exceeded 60 mg/L (Extreme Violation) (value=70.67, threshold=60.0). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
         "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T22:23:09.883233",
+        "input_trace": {
+            "recommended_action": [
+                "Maintain normal monitoring schedule. No immediate action required."
+            ],
+            "safety_note": "Verified from STP Operation Guidelines.",
+            "reference": "General-effluent-Standards.pdf"
+        },
+        "output_explanation": "System is operating within normal parameters. No anomalies detected.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T22:38:53.638668",
+        "input_trace": {
+            "recommended_action": [
+                "Maintain normal monitoring schedule. No immediate action required."
+            ],
+            "safety_note": "Verified from STP Operation Guidelines.",
+            "reference": "General-effluent-Standards.pdf"
+        },
+        "output_explanation": "System is operating within normal parameters. No anomalies detected.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T23:01:24.316798",
+        "input_trace": {
+            "recommended_action": [
+                "Maintain normal monitoring schedule. No immediate action required."
+            ],
+            "safety_note": "Verified from STP Operation Guidelines.",
+            "reference": "General-effluent-Standards.pdf"
+        },
+        "output_explanation": "System is operating within normal parameters. No anomalies detected.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T23:02:45.819413",
+        "input_trace": {
+            "recommended_action": [
+                "Maintain normal monitoring schedule. No immediate action required."
+            ],
+            "safety_note": "Verified from STP Operation Guidelines.",
+            "reference": "General-effluent-Standards.pdf"
+        },
+        "output_explanation": "System is operating within normal parameters. No anomalies detected.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T23:17:59.745737",
+        "input_trace": {
+            "recommended_action": [
+                "According to General Effluent Standards and CEQMS guidelines, the maximum permissible limit for BOD (Biochemical Oxygen Demand) in treated sewage effluent is 30 mg/L for discharge into inland surface waters. Effluent exceeding 30 mg/L requires immediate aeration adjustment and check for organic overload."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "CEQMS_Guidelines_2018.pdf"
+        },
+        "output_explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=30.43, threshold=30.0) pH rose above alkaline limit (8.5) (value=9.5, threshold=8.5). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T23:20:11.591238",
+        "input_trace": {
+            "recommended_action": [
+                "According to General Effluent Standards and CEQMS guidelines, the maximum permissible limit for BOD (Biochemical Oxygen Demand) in treated sewage effluent is 30 mg/L for discharge into inland surface waters. Effluent exceeding 30 mg/L requires immediate aeration adjustment and check for organic overload."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "CEQMS_Guidelines_2018.pdf"
+        },
+        "output_explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=30.43, threshold=30.0) pH rose above alkaline limit (8.5) (value=9.5, threshold=8.5). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T23:21:45.852411",
+        "input_trace": {
+            "recommended_action": [
+                "According to General Effluent Standards and CEQMS guidelines, the maximum permissible limit for BOD (Biochemical Oxygen Demand) in treated sewage effluent is 30 mg/L for discharge into inland surface waters. Effluent exceeding 30 mg/L requires immediate aeration adjustment and check for organic overload."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "CEQMS_Guidelines_2018.pdf"
+        },
+        "output_explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=31.04, threshold=30.0) pH rose above alkaline limit (8.5) (value=10.14, threshold=8.5). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-03-31T23:21:56.641303",
+        "input_trace": {
+            "recommended_action": [
+                "According to General Effluent Standards and CEQMS guidelines, the maximum permissible limit for BOD (Biochemical Oxygen Demand) in treated sewage effluent is 30 mg/L for discharge into inland surface waters. Effluent exceeding 30 mg/L requires immediate aeration adjustment and check for organic overload."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "CEQMS_Guidelines_2018.pdf"
+        },
+        "output_explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=31.0, threshold=30.0) pH rose above alkaline limit (8.5) (value=9.66, threshold=8.5). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-04-01T01:03:40.113553",
+        "input_trace": {
+            "recommended_action": [
+                "Maintain normal monitoring schedule. No immediate action required."
+            ],
+            "safety_note": "Verified from STP Operation Guidelines.",
+            "reference": "General-effluent-Standards.pdf"
+        },
+        "output_explanation": "System is operating within normal parameters. No anomalies detected.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-04-01T01:04:33.431006",
+        "input_trace": {
+            "recommended_action": [
+                "According to General Effluent Standards and CEQMS guidelines, the maximum permissible limit for BOD (Biochemical Oxygen Demand) in treated sewage effluent is 30 mg/L for discharge into inland surface waters. Effluent exceeding 30 mg/L requires immediate aeration adjustment and check for organic overload."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "CEQMS_Guidelines_2018.pdf"
+        },
+        "output_explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=32.98, threshold=30.0) pH rose above alkaline limit (8.5) (value=9.83, threshold=8.5). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+        "user_feedback": "Generated"
+    },
+    {
+        "timestamp": "2026-04-01T01:04:53.584391",
+        "input_trace": {
+            "recommended_action": [
+                "According to General Effluent Standards and CEQMS guidelines, the maximum permissible limit for BOD (Biochemical Oxygen Demand) in treated sewage effluent is 30 mg/L for discharge into inland surface waters. Effluent exceeding 30 mg/L requires immediate aeration adjustment and check for organic overload."
+            ],
+            "safety_note": "Verified from internal knowledge base.",
+            "reference": "CEQMS_Guidelines_2018.pdf"
+        },
+        "output_explanation": "CRITICAL: An extreme violation was detected where BOD exceeded 30 mg/L (Moderate Exposure) (value=30.87, threshold=30.0) pH rose above alkaline limit (8.5) (value=10.15, threshold=8.5). According to the retrieved regulatory standards in CEQMS_Guidelines_2018.pdf, the permissible limit for BOD is 30 mg/L. This extreme level indicates a major failure in biological treatment, requiring immediate emergency response to prevent environmental damage.",
+        "user_feedback": "Generated"
     }
 ]

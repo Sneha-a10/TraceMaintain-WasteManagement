@@ -1,8 +1,10 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-# Store the latest data from each simulated device
-recent_data = {}
+import collections
+
+# Store the last 200 logs to create a scrolling real-time history feed
+log_history = collections.deque(maxlen=200)
 
 class IngestHandler(BaseHTTPRequestHandler):
     
@@ -12,7 +14,7 @@ class IngestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(json.dumps(list(recent_data.values())).encode('utf-8'))
+            self.wfile.write(json.dumps(list(log_history)).encode('utf-8'))
             return
             
         self.send_response(200)
@@ -20,7 +22,9 @@ class IngestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         
         cards = ""
-        for device, data in recent_data.items():
+        # Show newest 10 items on the dashboard
+        for data in list(log_history)[-10:][::-1]:
+            device = data.get('device_id', 'UNKNOWN')
             cards += f"""
             <div style="border: 1px solid #334155; padding: 20px; margin: 10px; border-radius: 12px; background: #1e293b; color: white; width: 320px; display: inline-block; vertical-align: top; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
                 <h2 style="margin-top:0; color: #38bdf8; border-bottom: 1px solid #334155; padding-bottom: 10px;">{device}</h2>
@@ -71,8 +75,8 @@ class IngestHandler(BaseHTTPRequestHandler):
                 payload = json.loads(post_data.decode('utf-8'))
                 device = payload.get('device_id', 'UNKNOWN')
                 
-                # Store the latest reading in memory for the Dashboard to render
-                recent_data[device] = payload
+                # Store the reading in the rolling history list
+                log_history.append(payload)
                 
                 print(f"[\u2193 INGESTED] {device: <15} | pH: {payload.get('pH', '?'):<5} | Flow: {payload.get('flow_rate_m3_hr', '?'):<6} | Scenario: {payload.get('scenario')}")
                 
